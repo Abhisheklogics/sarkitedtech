@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARKIT EdTech | Innovation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020b16;
+            --accent-cyan: #00bcd4;
+            --s-color: #2196F3;
+            --a-color: #FFEB3B;
+            --r-color: #0DFF00;
+            --k-color: #FF0000;
+            --i-color: #673AB7;
+            --t-color: #E91E63;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-deep); }
+        
+        /* Custom Navbar Divider */
+        .nav-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+
+        /* SARKIT Tile Hover Logic */
+        .s-box:hover { background-color: var(--s-color) !important; color: white !important; box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4); }
+        .a-box:hover { background-color: var(--a-color) !important; color: #000 !important; box-shadow: 0 10px 30px rgba(255, 235, 59, 0.4); }
+        .r-box:hover { background-color: var(--r-color) !important; color: #000 !important; box-shadow: 0 10px 30px rgba(13, 255, 0, 0.4); }
+        .k-box:hover { background-color: var(--k-color) !important; color: white !important; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4); }
+        .i-box:hover { background-color: var(--i-color) !important; color: white !important; box-shadow: 0 10px 30px rgba(103, 58, 183, 0.4); }
+        .t-box:hover { background-color: var(--t-color) !important; color: white !important; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4); }
+    </style>
+</head>
+<body class="text-white pt-[100px]">
+
+    <nav class="fixed top-0 left-0 w-full h-[100px] bg-[#020b16]/95 flex items-center px-[5%] z-[2000] border-b-4 border-[#00bcd4] shadow-[0_4px_20px_rgba(0,188,212,0.2)]">
+        <div class="flex items-center gap-4 min-w-[250px]">
+            <div class="w-[50px] height-[50px] bg-[#1a2733] border border-white/10 rounded-lg flex items-center justify-center p-2">
+                <img src="favicon.ico" alt="SK" class="opacity-70">
+            </div>
+            <div class="flex flex-col">
+                <h2 class="text-xl font-black leading-none">SARKIT EdTech</h2>
+                <span class="text-[10px] tracking-[4px] text-gray-400 uppercase mt-1">Solutions</span>
+            </div>
+        </div>
+
+        <div class="flex-1 flex justify-end items-center gap-6">
+            <a href="index.html" class="text-xs font-semibold tracking-widest text-[#00bcd4] uppercase">Home</a>
+            <div class="nav-divider"></div>
+            
+            <div class="flex flex-col items-center">
+                <span class="text-xs font-semibold tracking-widest text-white uppercase cursor-default">Solutions</span>
+                <div class="flex gap-4 mt-1">
+                    <a href="labsetup.html" class="text-[10px] text-gray-400 hover:text-white transition">Lab Setups</a>
+                    <a href="vlab.html" class="text-[10px] text-gray-400 hover:text-white transition">Virtual Labs</a>
+                    <a href="curriculum.html" class="text-[10px] text-gray-400 hover:text-white transition">Curriculum</a>
+                    <a href="kits.html" class="text-[10px] text-gray-400 hover:text-white transition">Kits</a>
+                </div>
+            </div>
+
+            <div class="nav-divider"></div>
+            <a href="#" class="text-xs font-semibold tracking-widest text-white uppercase hover:text-[#00bcd4] transition">Resources</a>
+            <div class="nav-divider"></div>
+            <a href="about.html" class="text-xs font-semibold tracking-widest text-white uppercase hover:text-[#00bcd4] transition">About</a>
+            <div class="nav-divider"></div>
+            <a href="contact.html" class="text-xs font-semibold tracking-widest text-white uppercase hover:text-[#00bcd4] transition">Contact</a>
+        </div>
+    </nav>
+
+    <section class="h-[50vh] flex flex-col justify-center items-center text-center bg-[radial-gradient(circle_at_center,#0a192f_0%,#020b16_100%)]">
+        <h1 class="text-5xl md:text-7xl font-black mb-4">The Future of Lab Learning</h1>
+        <p class="text-[#00bcd4] tracking-[3px] font-semibold text-lg uppercase">Virtual Labs • Robotics • IoT • UAV Labs • AI Labs</p>
+    </section>
+
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-[#020b16] mb-4">The SARKIT Philosophy</h2>
+                <div class="h-1 w-24 bg-[#00bcd4] mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 h-[400px] md:h-[300px]">
+                <div class="box s-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#2196F3] group-hover:scale-125 transition">S</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Science</span>
+                </div>
+                <div class="box a-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#FFEB3B] group-hover:scale-125 transition">A</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Applied</span>
+                </div>
+                <div class="box r-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#0DFF00] group-hover:scale-125 transition">R</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Robotics</span>
+                </div>
+                <div class="box k-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#FF0000] group-hover:scale-125 transition">K</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Knowledge</span>
+                </div>
+                <div class="box i-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#673AB7] group-hover:scale-125 transition">I</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Innovation</span>
+                </div>
+                <div class="box t-box group flex-1 bg-gray-100 rounded-3xl flex flex-col justify-center items-center transition-all duration-500 cursor-pointer border-2 border-transparent hover:flex-[2.5]">
+                    <span class="text-6xl font-black text-[#E91E63] group-hover:scale-125 transition">T</span>
+                    <span class="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 group-hover:opacity-100">Technology</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-gray-500 text-xs tracking-widest uppercase border-t border-white/10">
+        &copy; 2024 SARKIT EdTech. All Rights Reserved.
+    </footer>
+
+</body>
+</html>

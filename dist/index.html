@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="1bEk_63mQFDLwuXHPz-BZKajM6BF5tYGotFYxKrLzs4" />
+    <title>SARKIT EdTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%);
+        }
+        .navbar::after{
+content:"";
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+height:3px;
+
+background:linear-gradient(
+90deg,
+#00f0ff,
+#2ed3e2,
+#7b61ff,
+#00f0ff
+);
+
+background-size:300% 100%;
+animation:gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+    </style>
+</head>
+<body class="bg-gray-50">
+
+
+<nav class="sticky top-0 left-0 w-full z-50 bg-sky-950 navbar" >
+    <div class="flex flex-col w-full">
+        <div class="flex justify-between items-center px-4 sm:px-6 md:px-20 h-16 md:h-20 text-white bg-gradient-to-b from-black/60 to-transparent">
+         
+            <div class="flex items-center gap-2 sm:gap-3">
+                  <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden bg-white/10 rounded-lg">
+        <img src="favicon.ico" alt="Logo" class="w-full h-full object-contain p-1" />
+    </div>
+                <div class="leading-none">
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">SARKIT EdTech</h1>
+                    <p class="text-[6px] sm:text-[8px] md:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] font-light text-gray-300">SOLUTIONS</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center">
+                <ul class="flex items-center text-[11px] font-semibold tracking-[0.15em]">
+                   <li id="nav-home" class="cursor-pointer"><a href="index.html">HOME</a></li>
+    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+
+                    <li class="relative group py-2">
+                        <div class="flex flex-col items-center">
+                            <span class="cursor-pointer">SOLUTIONS</span>
+                            <div class="flex space-x-3 mt-1 font-normal text-gray-400 whitespace-nowrap">
+                                <span class="hover:text-white cursor-pointer"><a href="labsetup.html">Lab Setups</a></span>
+                                <span class="hover:text-white cursor-pointer"><a href="vlab.html">Virtual Labs</a></span>
+                                <span class="hover:text-white cursor-pointer"><a href="curriculum.html">Curriculum</a></span>
+                                <span class="hover:text-white cursor-pointer"><a href="kits.html">Kits</a></span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                    <li class="hover:text-cyan-400 cursor-pointer uppercase">RESOURCES</li>
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                    <li class="hover:text-cyan-400 cursor-pointer uppercase"><a href="about.html">ABOUT</a></li>
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                   <li id="nav-contact" class="cursor-pointer uppercase"><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-3xl focus:outline-none">☰</button>
+        </div>
+    </div>
+</nav>
+<div id="mobile-menu" class="fixed inset-0 bg-black/50 z-50 md:hidden translate-x-full transition-transform duration-300 rounded-lg">
+    <div class="absolute right-0 top-0 h-fit w-64 bg-sky-900 text-white p-6">
+        <button id="menu-close" class="absolute top-4 right-4 text-3xl">&times;</button>
+        <ul class="mt-4 space-y-4 text-sm font-semibold">
+            <li class="text-cyan-100" id="nav-home"><a href="index.html">HOME</a></li>
+            <li class="border-t border-white/10 pt-2">SOLUTIONS</li>
+ <li  class="pl-4 text-xs text-gray-300" id="nav-labsetup"><a href="labsetup.html"> Lab Setups</a></li>
+            <li class="pl-4 text-xs text-gray-300"  id="nav-vlab"><a href="vlab.html">Virtual Labs</a></li>
+            <li class="pl-4 text-xs text-gray-300" id="nav-c"><a href="curriculum.html">Curriculum</a></li>
+            <li class="pl-4 text-xs text-gray-300" id="nav-kits"><a href="kits.html">Kits</a></li>
+            <li class="border-t border-white/10 pt-2">RESOURCES</li>
+           <li class="hover:text-cyan-400 cursor-pointer uppercase"><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html" id="nav-contact" id="nav-contact">CONTACT</a></li>
+        </ul>
+    </div>
+</div>
+
+<section class="relative w-full min-h-[500px]   md:min-h-[600px] flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <img src="./design.jpg" alt="Background" class="w-full h-full ">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-transparent"></div>
+    </div>
+    
+    <div class="container md:-mt-32 -mt-20 mx-auto px-6 md:px-20 z-10 py-20">
+        <div class="max-w-2xl text-left">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 leading-tight tracking-tight">
+                EMPOWERING <br> FUTURE INNOVATORS
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-lg">
+                Comprehensive STEM, AI, and Robotics Solutions for the 21st Century
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="bg-[#0070f3] hover:bg-blue-600 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg text-sm tracking-wide">
+                    EXPLORE LAB SOLUTIONS
+                </button>
+                <button class="bg-[#00dfd8] hover:bg-cyan-400 text-[#003333] px-8 py-3 rounded-full font-bold transition-all shadow-lg text-sm tracking-wide">
+                    BROWSE EDUCATIONAL KITS
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 -mt-20 md:-mt-32 pb-20 relative z-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="bg-gradient-to-b from-[#1e40af] to-[#3b82f6] p-8 rounded-2xl text-white shadow-xl flex flex-col items-start hover:-translate-y-2 transition duration-300 border border-white/10">
+            <div class="mb-4 text-white/90">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3 class="font-bold text-xl leading-tight">STEM EDUCATION</h3>
+            <p class="text-sm opacity-90 mt-2 font-medium">Curriculum, Books & Tools</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-[#00d4cc] to-[#22d3ee] p-8 rounded-2xl text-[#003333] shadow-xl flex flex-col items-start hover:-translate-y-2 transition duration-300 border border-white/10">
+            <div class="mb-4 text-[#003333]/80">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+            </div>
+            <h3 class="font-bold text-xl leading-tight">SUPPORTING <br>TECHNOLOGIES</h3>
+            <p class="text-sm opacity-90 mt-2 font-medium">IoT, AI, ML, Coding</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-[#0f172a] to-[#1e293b] p-8 rounded-2xl text-white shadow-xl flex flex-col items-start hover:-translate-y-2 transition duration-300 border border-white/20">
+            <div class="mb-4 text-white/90">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3 class="font-bold text-xl leading-tight">INNOVATION LABS</h3>
+            <p class="text-sm opacity-80 mt-2 font-medium text-gray-300">AI, Robotics, UAV, Agriculture Tech, Mechatronics</p>
+        </div>
+
+        <div class="bg-gradient-to-b from-[#f97316] to-[#ea580c] p-8 rounded-2xl text-white shadow-xl flex flex-col items-start hover:-translate-y-2 transition duration-300 border border-white/10">
+            <div class="mb-4 bg-white p-1 rounded-sm">
+                 <div class="w-8 h-5 flex flex-col">
+                    <div class="bg-[#FF9933] h-1/3 w-full"></div>
+                    <div class="bg-white h-1/3 w-full flex items-center justify-center"><div class="w-1 h-1 bg-blue-900 rounded-full"></div></div>
+                    <div class="bg-[#138808] h-1/3 w-full"></div>
+                 </div>
+            </div>
+            <h3 class="font-bold text-xl leading-tight">NEP 2020 <br>COMPLIANCE</h3>
+            <p class="text-sm opacity-90 mt-2 font-medium">Maping Curriculum According NEP2020</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- What is SARKIT ? -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+
+<section id="sarkit-container">
+    <div class="landscape-card">
+        <div class="header">
+            <h1 text-4xl md:text-6xl font-extrabold text-white tracking-tight>What is SARKIT ? </h1>
+            <p class="text-gray-400 mt-2 max-w-3xl mx-auto text-lg">A future-focused learning philosophy built on science and innovation.</p>
+        </div>
+
+        <div class="sarkit-grid">
+            <div class="box s-box" onclick="console.log('S clicked')">
+                <div class="letter">S</div>
+                <div class="label">Science</div>
+            </div>
+            <div class="box a-box">
+                <div class="letter">A</div>
+                <div class="label">Applied</div>
+            </div>
+            <div class="box r-box">
+                <div class="letter">R</div>
+                <div class="label">Robotics</div>
+            </div>
+            <div class="box k-box">
+                <div class="letter">K</div>
+                <div class="label">Knowledge</div>
+            </div>
+            <div class="box i-box">
+                <div class="letter">I</div>
+                <div class="label">Innovation</div>
+            </div>
+            <div class="box t-box">
+                <div class="letter">T</div>
+                <div class="label">Technology</div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #sarkit-container {
+            --s-color: #2196F3;
+            --a-color: #FFEB3B;
+            --r-color: #0DFF00;
+            --k-color: #FF0000;
+            --i-color: #673AB7;
+            --t-color: #E91E63;
+            --bg-dark: #050a15;
+            
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #050a15; /* Remove this line if your section already has a background */
+            font-family: 'Inter', sans-serif;
+        }
+
+        #sarkit-container .landscape-card {
+            background: rgba(0, 51, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(11, 10, 10, 0.187);
+            border-radius: 40px;
+            padding: 50px;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+
+        #sarkit-container .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin: 0;
+            letter-spacing: 10px;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        #sarkit-container .header p {
+            color: #a89b9b;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        #sarkit-container .sarkit-grid {
+            display: flex;
+            gap: 15px;
+            height: 350px;
+        }
+
+        #sarkit-container .box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        #sarkit-container .letter {
+            font-size: clamp(2rem, 4vw, 5rem);
+            font-weight: 900;
+        }
+
+        #sarkit-container .label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -5px;
+            opacity: 0.7;
+        }
+
+        /* Hover Mechanics */
+        #sarkit-container .box:hover {
+            flex: 2.5;
+            transform: translateY(-10px);
+        }
+
+        #sarkit-container .s-box { color: var(--s-color); }
+        #sarkit-container .s-box:hover { background: var(--s-color); color: white; box-shadow: 0 0 40px var(--s-color); }
+        
+        #sarkit-container .a-box { color: var(--a-color); }
+        #sarkit-container .a-box:hover { background: var(--a-color); color: #000; box-shadow: 0 0 40px var(--a-color); }
+        
+        #sarkit-container .r-box { color: var(--r-color); }
+        #sarkit-container .r-box:hover { background: var(--r-color); color: #000; box-shadow: 0 0 40px var(--r-color); }
+        
+        #sarkit-container .k-box { color: var(--k-color); }
+        #sarkit-container .k-box:hover { background: var(--k-color); color: white; box-shadow: 0 0 40px var(--k-color); }
+        
+        #sarkit-container .i-box { color: var(--i-color); }
+        #sarkit-container .i-box:hover { background: var(--i-color); color: white; box-shadow: 0 0 40px var(--i-color); }
+        
+        #sarkit-container .t-box { color: var(--t-color); }
+        #sarkit-container .t-box:hover { background: var(--t-color); color: white; box-shadow: 0 0 40px var(--t-color); }
+
+        /* Mobile Viewports */
+        @media (max-width: 800px) {
+            #sarkit-container .sarkit-grid {
+                flex-direction: column;
+                height: auto;
+            }
+            #sarkit-container .box {
+                height: 100px;
+                flex-direction: row;
+                gap: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const boxes = document.querySelectorAll('#sarkit-container .box');
+            boxes.forEach((box, i) => {
+                box.style.opacity = "0";
+                box.style.transform = "scale(0.8)";
+                setTimeout(() => {
+                    box.style.opacity = "1";
+                    box.style.transform = "scale(1)";
+                }, 200 * i);
+            });
+        });
+    </script>
+</section>
+
+<!-- WHAT WE DO ULTRA PREMIUM SECTION -->
+<section class="relative py-28 bg-gradient-to-b from-[#020617] via-[#020617] to-[#031224] overflow-hidden">
+
+    <!-- animated grid glow -->
+    <div class="absolute inset-0 opacity-30 bg-[linear-gradient(rgba(0,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.06)_1px,transparent_1px)] bg-[size:60px_60px] animate-pulse"></div>
+
+    <div class="max-w-7xl mx-auto px-6 md:px-20 relative z-10">
+
+        <!-- heading -->
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight">What We Do</h2>
+            <p class="text-gray-400 mt-6 max-w-3xl mx-auto text-lg">
+                SARKIT EdTech turns curiosity into capability through experiential STEM ecosystems, intelligent lab infrastructures, future-focused kits, and immersive simulations, enabling learners and institutions to build, innovate, and lead confidently in a rapidly evolving technological world. 
+            </p>
+        </div>
+
+        <!-- timeline style layout -->
+        <div class="relative">
+
+            <!-- center line -->
+            <div class="hidden md:block absolute left-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-cyan-400 to-transparent"></div>
+
+            <div class="space-y-20">
+
+                <!-- item -->
+                <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+                    <div class="bg-gradient-to-br from-cyan-500/10 to-indigo-500/10 border border-cyan-400/20 rounded-3xl p-10 backdrop-blur hover:scale-[1.03] transition duration-500 shadow-2xl">
+                        <h3 class="text-2xl font-bold text-white">Design Future Labs</h3>
+                        <p class="text-gray-400 mt-4">
+                            Conceptualizing intelligent STEM environments with modular robotics stations, immersive AI zones and innovation pods.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+                    <div></div>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border border-purple-400/20 rounded-3xl p-10 backdrop-blur hover:scale-[1.03] transition duration-500 shadow-2xl">
+                        <h3 class="text-2xl font-bold text-white">Develop STEM Curriculum</h3>
+                        <p class="text-gray-400 mt-4">
+                            Industry mapped programs aligned with NEP vision, emerging technologies and practical engineering workflows.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+                    <div class="bg-gradient-to-br from-indigo-500/10 to-teal-500/10 border border-indigo-400/20 rounded-3xl p-10 backdrop-blur hover:scale-[1.03] transition duration-500 shadow-2xl">
+                        <h3 class="text-2xl font-bold text-white">Deploy Innovation Kits</h3>
+                        <p class="text-gray-400 mt-4">
+                            Robotics, IoT, UAV and AI kits designed for hands-on experimentation and rapid prototyping.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- item -->
+                <div class="md:grid md:grid-cols-2 md:gap-16 items-center">
+                    <div></div>
+                    <div class="bg-gradient-to-br from-teal-500/10 to-cyan-500/10 border border-teal-400/20 rounded-3xl p-10 backdrop-blur hover:scale-[1.03] transition duration-500 shadow-2xl">
+                        <h3 class="text-2xl font-bold text-white">Enable Research & Startups</h3>
+                        <p class="text-gray-400 mt-4">
+                            Supporting incubation culture, interdisciplinary research and student innovation ecosystems.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>  
+
+<!-- LAB SETUPS -->
+<section class="relative bg-slate-50 py-32 overflow-hidden font-sans">
+    
+    <div class="absolute -top-24 -left-24 w-1/2 h-1/2 bg-gradient-to-br from-cyan-100/50 to-transparent rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -right-24 w-1/2 h-1/2 bg-gradient-to-tl from-indigo-100/50 to-transparent rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+            <div class="max-w-2xl">
+                <h2 class="text-6xl font-black text-slate-900 tracking-tighter leading-none mb-6">
+                    Future-Ready <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Lab Infrastructure</span>
+                </h2>
+                <p class="text-slate-500 text-xl leading-relaxed">
+                    Modular STEM ecosystems engineered for high-impact research and immersive learning.
+                </p>
+            </div>
+            <div class="hidden md:block">
+                <div class="flex -space-x-4">
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-blue-500 flex items-center justify-center text-white shadow-lg">AI</div>
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-indigo-500 flex items-center justify-center text-white shadow-lg">IoT</div>
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-purple-500 flex items-center justify-center text-white shadow-lg">UAV</div>
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-pink-500 flex items-center justify-center text-white shadow-lg">ROBO</div>
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-green-500 flex items-center justify-center text-white shadow-lg">AR/VR</div>
+                    <div class="w-14 h-14 rounded-full border-4 border-white bg-orange-500 flex items-center justify-center text-white shadow-lg">PCB</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-blue-200/50 transition-all duration-700">
+                <img src="school.png" 
+                     alt="Schools" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 transition-opacity group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-blue-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">📘</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">For Schools</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Foundational STEM discovery labs with robotics basics and creative coding pods.
+                    </p>
+                    <div class="mt-6 flex items-center text-blue-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-700">
+                <img src="college.png" 
+                     alt="Colleges" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-indigo-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">🧠</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">For Colleges</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Industry aligned innovation labs with AI experimentation and IoT clusters.
+                    </p>
+                    <div class="mt-6 flex items-center text-indigo-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-700">
+                <img src="university.png"
+                     alt="Universities" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-purple-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">🔬</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">For Universities</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Advanced research ecosystems and digital twin simulation environments.
+                    </p>
+                    <div class="mt-6 flex items-center text-purple-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div>
+
+             <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-700">
+                <img src="private.png"
+                     alt="Universities" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-purple-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">🔬</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">For Private Institutions</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Turning Curiosity into Capability with Real-Time Skill Development.
+                    </p>
+                    <div class="mt-6 flex items-center text-purple-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div> 
+
+            <!-- For Robotics & Automation Lab -->
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-indigo-200/50 transition-all duration-700">
+                <img src="robotics.png" 
+                     alt="Colleges" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-indigo-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">🤖</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">Robotics & Automation Lab</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Hands-On Robotics Innovation Turning Ideas into Intelligent Machines.
+                    </p>
+                    <div class="mt-6 flex items-center text-indigo-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div>
+
+            <!-- For IoT & Smart Systems Lab -->
+             <div class="group relative aspect-[4/5] overflow-hidden rounded-[3rem] bg-white shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-purple-200/50 transition-all duration-700">
+                <img src="iot.png"
+                     alt="Universities" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90"></div>
+                
+                <div class="absolute inset-0 p-10 flex flex-col justify-end">
+                    <div class="mb-4 inline-flex items-center justify-center w-14 h-14 bg-purple-500/20 backdrop-blur-md border border-white/30 rounded-2xl text-2xl">🌐</div>
+                    <h3 class="text-3xl font-bold text-white mb-3">For IoT & Smart Systems Lab</h3>
+                    <p class="text-slate-200 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        Building Smart Systems for a Connected, Future-Ready World.
+                    </p>
+                    <div class="mt-6 flex items-center text-purple-400 font-bold group-hover:translate-x-2 transition-transform">
+                        Explore Infrastructure →
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-20 flex justify-center">
+            <button onclick="toggleHighlight()" class="group relative px-12 py-5 rounded-full bg-slate-900 text-white font-black text-xl overflow-hidden shadow-2xl transition-all hover:scale-105 active:scale-95">
+                <span class="relative z-10">Request Custom Setup →</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    function toggleHighlight() {
+        console.log("Premium Infrastructure Request Triggered");
+        // Add your interaction logic here
+    }
+</script>
+
+
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 -mt-10 md:-mt-12">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Featured Kits</h2>
+
+       
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- CARD -->
+        <div class="bg-white rounded-3xl shadow-lg p-4 flex items-center gap-4 hover:shadow-xl transition">
+            
+            <!-- IMAGE -->
+            <div class="w-24 h-20 bg-gray-100 rounded-xl flex items-center justify-center">
+                <!-- image here -->
+            </div>
+
+            <!-- CONTENT -->
+            <div class="flex-1">
+                <h4 class="font-bold text-lg text-gray-800">Lego</h4>
+                <p class="text-sm text-gray-500 line-clamp-2">
+                    Lego build, disassemble, and recreate vehicles, buildings, and robots to foster creativity and problem-solving skills.
+                </p>
+
+                <button class="mt-3 bg-sky-600 text-white text-xs px-4 py-2 rounded-full font-semibold hover:bg-sky-500">
+                    LEARN MORE
+                </button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="bg-white rounded-3xl shadow-lg p-4 flex items-center gap-4 hover:shadow-xl transition">
+            <div class="w-24 h-20 bg-gray-100 rounded-xl"></div>
+
+            <div class="flex-1">
+                <h4 class="font-bold text-lg text-gray-800">IoT</h4>
+                <p class="text-sm text-gray-500">
+                    IoT innovation and technology kits.
+                </p>
+
+                <button class="mt-3 bg-cyan-500 text-white text-xs px-4 py-2 rounded-full font-semibold hover:bg-cyan-400">
+                    LEARN MORE
+                </button>
+            </div>
+        </div>
+
+        <!-- CARD -->
+        <div class="bg-white rounded-3xl shadow-lg p-4 flex items-center gap-4 hover:shadow-xl transition">
+            <div class="w-24 h-20 bg-gray-100 rounded-xl"></div>
+
+            <div class="flex-1">
+                <h4 class="font-bold text-lg text-gray-800">AI Kits</h4>
+                <p class="text-sm text-gray-500">
+                    Advanced technology kits.
+                </p>
+
+                <button class="mt-3 bg-cyan-500 text-white text-xs px-4 py-2 rounded-full font-semibold hover:bg-cyan-400">
+                    LEARN MORE
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CARD -->
+        <div class="bg-white rounded-3xl shadow-lg p-4 flex items-center gap-4 hover:shadow-xl transition">
+            <div class="w-24 h-20 bg-gray-100 rounded-xl"></div>
+
+            <div class="flex-1">
+                <h4 class="font-bold text-lg text-gray-800">AI Kits</h4>
+                <p class="text-sm text-gray-500">
+                    Advanced technology kits.
+                </p>
+
+                <button class="mt-3 bg-cyan-500 text-white text-xs px-4 py-2 rounded-full font-semibold hover:bg-cyan-400">
+                    LEARN MORE
+                </button>
+            </div>
+        </div>
+</section>
+<footer class="bg-slate-900 text-white py-8 sm:py-12 mt-12 px-4 sm:px-6 md:px-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
+        <div>
+            <h3 class="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4 uppercase tracking-tighter">SARKIT EdTech</h3>
+            <p class="text-xs sm:text-sm text-gray-400">Comprehensive STEM, AI, and Robotics Solutions for schools and educational institutions globally.</p>
+        </div>
+        <div>
+            <h4 class="font-bold mb-3 sm:mb-4 uppercase text-[10px] sm:text-xs tracking-widest text-gray-400">Navigation</h4>
+            <ul class="text-xs sm:text-sm space-y-1.5 sm:space-y-2 text-gray-300">
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="vlab.html">Virtual Labs</a></li>
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="kits.html">Educational Kits</a></li>
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="contact.html">Contact Support</a></li>
+            </ul>
+        </div>
+        <div class="sm:col-span-2 md:col-span-1">
+            <h4 class="font-bold mb-3 sm:mb-4 uppercase text-[10px] sm:text-xs tracking-widest text-gray-400">Location</h4>
+            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Vaishali Nagar<br>PIN - 302021, Jaipur<br>Rajasthan, India</p>
+        </div>
+    </div>
+    <div class="text-center mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 text-[8px] sm:text-[10px] text-gray-300 uppercase tracking-widest">
+        © 2024 SARKIT EdTech. Built for Future Innovators.
+    </div>
+</footer>
+
+<script src="./script.js">
+   
+   
+</script>
+
+</body>
+</html>
