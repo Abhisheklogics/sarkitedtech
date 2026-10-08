@@ -86,110 +86,10 @@
 
     <!-- 5) CSS -->
 <style>
-/* ==========================================================================
-   SARKIT - MASTER STYLESHEET  (de-duplicated + responsive)
-   --------------------------------------------------------------------------
-   CONTENTS
-     0.  Base & shared utilities
-     1.  Shared grid backgrounds (.blueprint-grid)
-     2.  SARKIT LAB  - Laboratories showcase
-     3.  SARKITSHALA - Hero
-     4.  SARKIT Ecosystem - "Choose your path" (panoramic board)
-     5.  Audience Gateway          (#audience-gateway)
-     6.  Lab Hero                  (#lab-hero)
-     7.  Bento Ecosystem           (#bento-ecosystem)
-     8.  Pipeline / Original page  (hero-gradient, navbar, pipeline cards)
-     9.  Footer                    (.sk-footer)
-     10. Reduced motion
-   ========================================================================== */
+/* ===== SARKITSHALA - Custom CSS ===== */
 
-
-/* ==========================================================================
-   0. BASE & SHARED UTILITIES
-   ========================================================================== */
-*, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #fbfbfd;
-  overflow-x: hidden;
-  overflow-x: clip;               /* sticky ko break nahi karta */
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Optional helpers */
-.font-inter   { font-family: 'Inter', sans-serif; }
-.font-display { font-family: 'Montserrat', 'Inter', sans-serif; }
-.font-script  { font-family: 'Caveat', cursive; }
-
-/* Scrollbar hide (sirf ek baar) */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Thin custom scrollbar */
-.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
-
-/* Drag scroll */
-.grab-cursor { cursor: grab; user-select: none; }
-.grab-cursor:active { cursor: grabbing; }
-
-/* Tailwind config me jo brand shades nahi hain (400 / 200 / 300) unke fix */
-.text-brand-400 { color: #fb923c; }
-.border-brand-200 { border-color: #fed7aa; }
-.border-brand-300,
-.hover\:border-brand-300:hover { border-color: #fdba74; }
-
-
-/* ==========================================================================
-   1. SHARED GRID BACKGROUNDS
-   --------------------------------------------------------------------------
-   .blueprint-grid         -> slate grid (Pipeline page)
-   .blueprint-grid--orange -> orange tint grid (Laboratories showcase)
-   NOTE: Laboratories section me class add karo:
-         class="... blueprint-grid blueprint-grid--orange ..."
-   ========================================================================== */
-.blueprint-grid {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FAFAFC;
-  background-image:
-    linear-gradient(to right, rgba(220, 226, 235, 0.45) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(220, 226, 235, 0.45) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-.blueprint-grid.blueprint-grid--orange,
-.blueprint-grid--orange {
-  background-color: #FBFBFD;
-  background-image:
-    linear-gradient(to right, rgba(243, 112, 33, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(243, 112, 33, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-
-/* ==========================================================================
-   2. SARKIT LAB - LABORATORIES SHOWCASE
-   ========================================================================== */
-/* Oscilloscope sine wave */
-@keyframes waveDash {
-  0%   { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: 160; }
-}
-.animated-sine {
-  stroke-dasharray: 6, 3;
-  animation: waveDash 8s linear infinite;
-}
-
-
-/* ==========================================================================
-   3. SARKITSHALA - HERO
-   ========================================================================== */
+/* Drafting circuit grid pattern in the background */
 .bg-circuit-grid {
-  font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: #fcfcfc;
   background-image:
     radial-gradient(#e2e8f0 1px, transparent 1px),
@@ -198,167 +98,422 @@ body {
   background-size: 24px 24px, 48px 48px, 48px 48px;
 }
 
+/* Ambient warm desk lighting */
 .desk-glow {
   background: radial-gradient(circle at 60% 40%, rgba(254, 215, 170, 0.35) 0%, rgba(255, 247, 237, 0.15) 45%, transparent 70%);
 }
 
-.laptop-frame      { box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1); }
-.laptop-base-shadow{ box-shadow: 0 35px 35px -10px rgba(15, 23, 42, 0.45); }
-
-/* FIX: HTML me lg:col-span-3.5 / 5.5 use hua hai, jo Tailwind me exist nahi karta.
-   Isse tablet (1024-1279px) par columns 1/12 width me toot jate the. */
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .lg\:col-span-3\.5 { grid-column: span 3 / span 3; }
-  .lg\:col-span-5\.5 { grid-column: span 6 / span 6; }
+/* Hide scrollbars for carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-
-/* ==========================================================================
-   4. SARKIT ECOSYSTEM - "CHOOSE YOUR PATH" (panoramic board)
-   ========================================================================== */
-.panoramic-canvas {
-  position: relative;
-  width: 100%;
-  max-width: 2048px;
-  height: 768px;
-  margin-inline: auto;
-  flex-shrink: 0;
-  overflow: hidden;
+/* Laptop bevel effect */
+.laptop-frame {
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.laptop-base-shadow {
+  box-shadow: 0 35px 35px -10px rgba(15, 23, 42, 0.45);
+}
+body {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #f8fafc;
+  overflow-x: auto;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.panoramic-canvas {
+  width: 2048px;
+  height: 768px;
+  position: relative;
   background-color: #fbfcfd;
   background-image:
     radial-gradient(circle at 50% 120px, rgba(249, 115, 22, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
     radial-gradient(#e2e8f0 1px, transparent 1px);
   background-size: 100% 100%, 24px 24px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* FIX: HTML me p-4.5 hai (Tailwind me nahi) -> card ka padding gayab tha */
 .glow-orange-soft {
-  padding: 1.125rem;
   box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.15), 0 0 20px 2px rgba(249, 115, 22, 0.08);
 }
 
-.laptop-glow-left,
-.laptop-glow-right {
+.laptop-glow-left {
   position: absolute;
   bottom: 60px;
+  left: 100px;
   width: 550px;
   height: 70px;
   background: radial-gradient(ellipse, rgba(234, 88, 12, 0.14) 0%, rgba(249, 115, 22, 0) 70%);
   filter: blur(14px);
   pointer-events: none;
 }
-.laptop-glow-left  { left: 100px; }
-.laptop-glow-right { right: 100px; }
 
-/* Laptop hardware */
+.laptop-glow-right {
+  position: absolute;
+  bottom: 60px;
+  right: 100px;
+  width: 550px;
+  height: 70px;
+  background: radial-gradient(ellipse, rgba(234, 88, 12, 0.14) 0%, rgba(249, 115, 22, 0) 70%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+/* ---------- Laptop hardware ---------- */
 .laptop-chassis {
-  position: relative;
   background: #111827;
   border-radius: 14px 14px 2px 2px;
   border: 6px solid #1f2937;
   border-bottom: 3px solid #111827;
   box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
+  position: relative;
 }
+
 .laptop-camera-notch {
-  position: absolute;
-  top: 3px;
-  left: 50%;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #374151;
+  position: absolute;
+  top: 3px;
+  left: 50%;
   transform: translateX(-50%);
 }
+
 .laptop-base {
-  position: relative;
   height: 12px;
-  margin: 0 -22px;
-  border-radius: 0 0 14px 14px;
   background: linear-gradient(180deg, #d1d5db 0%, #9ca3af 60%, #6b7280 100%);
+  border-radius: 0 0 14px 14px;
+  position: relative;
+  margin: 0 -22px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 .laptop-base::after {
   content: '';
   position: absolute;
   top: 0;
   left: 50%;
+  transform: translateX(-50%);
   width: 70px;
   height: 4px;
-  border-radius: 0 0 4px 4px;
   background: #6b7280;
-  transform: translateX(-50%);
+  border-radius: 0 0 4px 4px;
 }
 
-/* ---- Responsive: board ab fixed 2048px nahi, fluid hai ---- */
-@media (max-width: 1860px) {
-  .panoramic-canvas { height: auto; }
+* { box-sizing: border-box; }
 
-  /* Main stage: flex -> grid (center card upar, dono laptops neeche) */
-  .panoramic-canvas :has(> [class*="w-[620px]"]) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 620px));
-    justify-content: center;
-    align-items: start;
-    gap: 48px 40px;
-    padding-top: 12px;
-  }
-  .panoramic-canvas [class*="w-[620px]"] { width: 100%; }
-  .panoramic-canvas [class*="w-[520px]"] {
-    width: 100%;
-    max-width: 520px;
-    grid-column: 1 / -1;
-    justify-self: center;
-    order: -1;
-  }
-
-  /* Bottom "Recommended path" strip */
-  .panoramic-canvas > footer { flex-wrap: wrap; }
-  .panoramic-canvas > footer > [class*="w-56"] {
-    width: 100%;
-    padding: 0 0 8px;
-    border-right: 0;
-  }
-  .panoramic-canvas > footer > .grid {
-    flex-basis: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
 }
 
-@media (max-width: 1380px) {
-  .panoramic-canvas :has(> [class*="w-[620px]"]) { grid-template-columns: minmax(0, 620px); }
+/* Footer = size container, taaki cqw units kaam karein */
+.sk-footer {
+  container-type: inline-size;
+  width: 100%;
 }
 
-@media (max-width: 1100px) {
-  /* Side watermarks headline se takrate hain */
-  .panoramic-canvas > header > .absolute { display: none; }
+/* Stage = background image wala canvas (2048:768 ratio) */
+.sk-stage {
+  --px: calc(100cqw / 2048);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2048 / 768;
+  background: url('footer-bg.webp') center / 100% 100% no-repeat;
+  overflow: hidden;
+  color: #1c1c1c;
 }
 
-@media (max-width: 767px) {
-  .laptop-glow-left, .laptop-glow-right { display: none; }
-  .laptop-base { margin: 0 -10px; }
-  .panoramic-canvas { padding: 16px; }
-  .panoramic-canvas h1 { font-size: 1.75rem; line-height: 1.15; }
-  .panoramic-canvas .glow-orange-soft { padding: 0.9rem; }
-  /* Laptop ke neeche wale feature pills wrap ho jayein */
-  .panoramic-canvas [class*="w-[620px]"] > .mt-4 { flex-wrap: wrap; justify-content: center; }
-  /* Laptop screen ke andar ke side panels chhote screen par hide */
-  .panoramic-canvas .laptop-chassis [class*="w-36"],
-  .panoramic-canvas .laptop-chassis [class*="w-28"] { display: none; }
+/* ---------- Center content div ---------- */
+.sk-card {
+  position: absolute;
+  left: calc(var(--px) * 155);
+  top: calc(var(--px) * 155);
+  width: calc(var(--px) * 1805);
+  height: calc(var(--px) * 355);
+  display: grid;
+  grid-template-columns:
+    calc(var(--px) * 482)   /* brand */
+    calc(var(--px) * 240)   /* platform */
+    calc(var(--px) * 271)   /* labs */
+    calc(var(--px) * 194)   /* resources */
+    calc(var(--px) * 173)   /* company */
+    calc(var(--px) * 445);  /* stay updated */
 }
 
-@media (max-width: 479px) {
-  .panoramic-canvas .laptop-chassis [class*="w-24"] { display: none; }
-  .panoramic-canvas .glow-orange-soft .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* ---------- Brand column ---------- */
+.sk-brand { padding-right: calc(var(--px) * 40); }
+
+.sk-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--px) * 14);
+  height: calc(var(--px) * 76);
+  margin-top: calc(var(--px) * 3);
+}
+.sk-logo svg { width: calc(var(--px) * 76); height: calc(var(--px) * 76); flex-shrink: 0; }
+.sk-logo-title {
+  font-size: calc(var(--px) * 48);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+.sk-logo-title span { font-weight: 400; }
+.sk-logo-sub {
+  font-size: calc(var(--px) * 23);
+  font-weight: 500;
+  color: #4b5563;
+  margin-top: calc(var(--px) * 4);
+  line-height: 1;
 }
 
+.sk-desc {
+  margin: calc(var(--px) * 30) 0 0;
+  font-size: calc(var(--px) * 21);
+  line-height: calc(var(--px) * 28.5);
+  color: #4a4a4a;
+  width: calc(var(--px) * 450);
+}
+.sk-desc b { color: #1a1a1a; font-weight: 600; }
 
-/* ==========================================================================
-   5. AUDIENCE GATEWAY  (#audience-gateway)
-   ========================================================================== */
-#audience-gateway,
-#audience-gateway .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
-#audience-gateway .font-handwriting { font-family: 'Caveat', cursive; }
+.sk-features {
+  display: flex;
+  margin: calc(var(--px) * 30) 0 0 calc(var(--px) * -16);
+}
+.sk-feature {
+  text-align: center;
+  padding: 0 calc(var(--px) * 15);
+  border-right: calc(var(--px) * 1) solid rgba(0, 0, 0, 0.18);
+  font-size: calc(var(--px) * 15.5);
+  line-height: 1.28;
+  color: #333;
+}
+.sk-feature:last-child { border-right: 0; }
+.sk-feature svg {
+  display: block;
+  margin: 0 auto calc(var(--px) * 9);
+  width: calc(var(--px) * 44);
+  height: calc(var(--px) * 44);
+  color: #f26a1b;
+}
+
+/* ---------- Link columns ---------- */
+.sk-col { padding-top: calc(var(--px) * 24); }
+.sk-col--first {
+  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
+  padding-left: calc(var(--px) * 44);
+}
+.sk-col h4 {
+  margin: 0;
+  font-size: calc(var(--px) * 24);
+  line-height: calc(var(--px) * 30);
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.01em;
+}
+.sk-col h4::after {
+  content: '';
+  display: block;
+  width: calc(var(--px) * 50);
+  height: calc(var(--px) * 3);
+  margin-top: calc(var(--px) * 7);
+  background: #f26a1b;
+  border-radius: 99px;
+}
+.sk-col ul { list-style: none; margin: calc(var(--px) * 21) 0 0; padding: 0; }
+.sk-col li { height: calc(var(--px) * 42.4); display: flex; align-items: center; }
+.sk-col a {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--px) * 14);
+  font-size: calc(var(--px) * 18.5);
+  color: #2a2a2a;
+  text-decoration: none;
+  transition: color .2s;
+  white-space: nowrap;
+}
+.sk-col a:hover { color: #f26a1b; }
+.sk-col a svg { width: calc(var(--px) * 15); height: calc(var(--px) * 15); color: #f26a1b; flex-shrink: 0; }
+
+/* ---------- Stay updated ---------- */
+.sk-updates {
+  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
+  padding-left: calc(var(--px) * 48);
+  padding-top: calc(var(--px) * 22);
+}
+.sk-updates h3 {
+  margin: 0;
+  font-size: calc(var(--px) * 40);
+  line-height: calc(var(--px) * 48);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111;
+}
+.sk-updates h3 span { color: #f26a1b; }
+.sk-updates p {
+  margin: calc(var(--px) * 10) 0 0;
+  font-size: calc(var(--px) * 20.5);
+  line-height: calc(var(--px) * 28);
+  color: #555;
+  width: calc(var(--px) * 360);
+}
+
+.sk-form { display: flex; margin-top: calc(var(--px) * 29); width: calc(var(--px) * 391); }
+.sk-form input {
+  flex: 1;
+  min-width: 0;
+  height: calc(var(--px) * 48);
+  border: calc(var(--px) * 1) solid #d9d4cc;
+  border-right: 0;
+  border-radius: calc(var(--px) * 8) 0 0 calc(var(--px) * 8);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0 calc(var(--px) * 14);
+  font: 400 calc(var(--px) * 18.5) 'Inter', sans-serif;
+  color: #333;
+  outline: none;
+}
+.sk-form input::placeholder { color: #8a8a8a; }
+.sk-form button {
+  height: calc(var(--px) * 48);
+  padding: 0 calc(var(--px) * 24);
+  border: 0;
+  border-radius: 0 calc(var(--px) * 8) calc(var(--px) * 8) 0;
+  background: #f26a1b;
+  color: #fff;
+  font: 600 calc(var(--px) * 19) 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background .2s;
+}
+.sk-form button:hover { background: #d95a10; }
+
+.sk-social { display: flex; align-items: center; gap: calc(var(--px) * 36); margin: calc(var(--px) * 40) 0 0 calc(var(--px) * 1); }
+.sk-social a { display: block; color: #111; }
+.sk-social svg { width: calc(var(--px) * 41); height: calc(var(--px) * 41); display: block; }
+.sk-join { margin-top: calc(var(--px) * 8); font-size: calc(var(--px) * 20.5); color: #222; }
+
+/* ---------- Bottom bar ---------- */
+.sk-bottom {
+  position: absolute;
+  left: calc(var(--px) * 418);
+  top: calc(var(--px) * 580);
+  width: calc(var(--px) * 1312);
+  border-top: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: space-between;
+  padding-top: calc(var(--px) * 29);
+  font-size: calc(var(--px) * 15.5);
+  color: #333;
+}
+.sk-bottom b { font-weight: 700; color: #111; }
+.sk-legal { display: flex; align-items: center; margin-right: calc(var(--px) * 112); }
+.sk-legal a { color: #222; text-decoration: none; }
+.sk-legal a:hover { color: #f26a1b; }
+.sk-legal i { width: calc(var(--px) * 1.5); height: calc(var(--px) * 15); background: #222; margin: 0 calc(var(--px) * 16); }
+
+/* ---------- Handwritten notes ---------- */
+.sk-note-left {
+  position: absolute;
+  left: calc(var(--px) * 165);
+  top: calc(var(--px) * 566);
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  font-weight: 500;
+  font-size: calc(var(--px) * 36);
+  line-height: 1.0;
+  color: #1a1a1a;
+  transform: rotate(-13deg);
+  transform-origin: left top;
+}
+.sk-note-left span { display: block; white-space: nowrap; }
+.sk-note-left span:nth-child(2) { padding-left: calc(var(--px) * 12); }
+.sk-note-left span:nth-child(3) { padding-left: calc(var(--px) * 22); }
+.sk-note-left span:nth-child(4) { padding-left: calc(var(--px) * 30); }
+.sk-arrow {
+  position: absolute;
+  left: calc(var(--px) * 285);
+  top: calc(var(--px) * 578);
+  width: calc(var(--px) * 90);
+  height: calc(var(--px) * 76);
+  color: #1a1a1a;
+}
+
+.sk-note-right {
+  position: absolute;
+  left: calc(var(--px) * 1840);
+  top: calc(var(--px) * 640);
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  font-weight: 500;
+  font-size: calc(var(--px) * 34);
+  line-height: 1.05;
+  color: #1a1a1a;
+  transform: rotate(-23deg);
+  transform-origin: left bottom;
+}
+.sk-note-right span { display: block; white-space: nowrap; }
+.sk-note-right span:nth-child(2) { padding-left: calc(var(--px) * 10); }
+.sk-note-right span:nth-child(3) { padding-left: calc(var(--px) * 20); }
+.sk-note-right::after {
+  content: '';
+  display: block;
+  height: calc(var(--px) * 5);
+  width: calc(var(--px) * 175);
+  margin: calc(var(--px) * 6) 0 0 calc(var(--px) * 8);
+  background: #f26a1b;
+  border-radius: 99px;
+  transform: rotate(-2deg);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fbfbfd;
+  overflow-x: hidden;
+}
+
+/* Blueprint grid pattern */
+.blueprint-grid {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(243, 112, 33, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(243, 112, 33, 0.05) 1px, transparent 1px);
+}
+
+/* Hide default scrollbar for carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Oscilloscope sine wave animation */
+@keyframes waveDash {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 160; }
+}
+.animated-sine {
+  stroke-dasharray: 6, 3;
+  animation: waveDash 8s linear infinite;
+}
+#audience-gateway {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#audience-gateway .font-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#audience-gateway .font-handwriting {
+  font-family: 'Caveat', cursive;
+}
 
 .tech-grid-pattern {
   background-color: #f8faff;
@@ -370,9 +525,10 @@ body {
 }
 
 .card-photo-overlay {
-  background: linear-gradient(180deg, rgba(11, 28, 48, 0) 45%, rgba(11, 28, 48, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(11,28,48,0) 45%, rgba(11,28,48,0.55) 100%);
 }
 
+/* Tailwind config ki jagah plain CSS animations (dusre page me config nahi chahiye) */
 @keyframes pulseSubtle {
   0%, 100% { opacity: 0.8; transform: scale(1); }
   50%      { opacity: 0.4; transform: scale(1.05); }
@@ -386,73 +542,97 @@ body {
   transform-origin: center;
   transform-box: fill-box;
 }
-.animate-glow-line { animation: glowLine 4s ease-in-out infinite; }
+.animate-glow-line {
+  animation: glowLine 4s ease-in-out infinite;
+}
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-subtle, .animate-glow-line {
+    animation: none !important;
+  }
+}
 
-/* ==========================================================================
-   6. LAB HERO  (#lab-hero)
-   ========================================================================== */
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Drag scroll */
+.grab-cursor { cursor: grab; user-select: none; }
+.grab-cursor:active { cursor: grabbing; }
+
 #lab-hero {
   background-color: #FAF9F6;
   color: #1e293b;
   font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-#lab-hero ::selection { background: #f97316; color: #fff; }
+#lab-hero ::selection {
+  background: #f97316;
+  color: #fff;
+}
+
+/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
 #lab-hero .font-lab-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
 #lab-hero .font-lab-mono { font-family: 'JetBrains Mono', monospace; }
 
+/* Subtle warm ambient laboratory backdrop simulation */
 .lab-hero-bg {
   background: radial-gradient(circle at 85% 35%, rgba(241, 90, 36, 0.08) 0%, rgba(255, 247, 237, 0.4) 30%, #fcfbf9 75%);
 }
 
+/* Monitor Display 3D / Perspective Styling */
 .monitor-frame {
-  border: 7px solid #1a1e24;
-  border-radius: 20px;
   box-shadow:
     0 25px 50px -12px rgba(15, 23, 42, 0.35),
     0 0 0 1px rgba(15, 23, 42, 0.8),
     inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+  border: 7px solid #1a1e24;
+  border-radius: 20px;
 }
+
 .monitor-stand {
   background: linear-gradient(180deg, #2b303c 0%, #171a21 100%);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
+/* Circuit Wire Simulation styling */
 .wire-curved {
-  fill: none;
   stroke-linecap: round;
-  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+  fill: none;
+  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.15));
 }
 
-@media (max-width: 639px) {
-  .monitor-frame { border-width: 4px; border-radius: 14px; }
-}
-
-
-/* ==========================================================================
-   7. BENTO ECOSYSTEM  (#bento-ecosystem)
-   ========================================================================== */
+/* .no-scrollbar pehle se tumhare CSS me hai (audience-gateway.css me).
+   Agar nahi hai to ye 2 lines add kar lo: */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 #bento-ecosystem {
   background-color: #f8f9ff;
   color: #0b1c30;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-#bento-ecosystem ::selection { background: #f37021; color: #fff; }
+#bento-ecosystem ::selection {
+  background: #f37021;
+  color: #fff;
+}
+
+/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
 #bento-ecosystem .font-bento-display { font-family: 'Plus Jakarta Sans', sans-serif; }
 #bento-ecosystem .font-bento-mono    { font-family: 'JetBrains Mono', monospace; }
-#bento-ecosystem .bento-tile { transition: all .3s ease; }
 
 .glow-orange { box-shadow: 0 0 35px -5px rgba(243, 112, 33, 0.25); }
 .glow-cyan   { box-shadow: 0 0 35px -5px rgba(58, 158, 226, 0.2); }
+
+.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
 
 .circuit-dot-grid {
   background-image: radial-gradient(rgba(160, 65, 0, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Material Symbols (font link ke saath) */
+/* Material Symbols icon base (font link ke saath kaam karta hai) */
 #bento-ecosystem .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -469,31 +649,71 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Switcher tile transitions */
+#bento-ecosystem .bento-tile { transition: all .3s ease; }
 
-/* ==========================================================================
-   8. PIPELINE / ORIGINAL PAGE
-   ========================================================================== */
-.hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%); }
+/* ===== AUDIENCE GATEWAY SECTION CSS ===== */
 
-/* Navbar animated bottom line (FIX: ::after ke liye relative zaroori hai) */
-.navbar { position: relative; }
-.navbar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #00f0ff, #2ed3e2, #7b61ff, #00f0ff);
-  background-size: 300% 100%;
-  animation: gradientMove 6s linear infinite;
+#audience-gateway {
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
-@keyframes gradientMove {
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+#audience-gateway .font-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#audience-gateway .font-handwriting {
+  font-family: 'Caveat', cursive;
 }
 
-/* Backgrounds */
+.tech-grid-pattern {
+  background-color: #f8faff;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(203, 213, 225, 0.4) 1.2px, transparent 0),
+    linear-gradient(to right, rgba(226, 232, 240, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.45) 1px, transparent 1px);
+  background-size: 24px 24px, 120px 120px, 120px 120px;
+}
+
+.card-photo-overlay {
+  background: linear-gradient(180deg, rgba(11,28,48,0) 45%, rgba(11,28,48,0.55) 100%);
+}
+
+/* Tailwind config ki jagah plain CSS animations (dusre page me config nahi chahiye) */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(1.05); }
+}
+@keyframes glowLine {
+  0%, 100% { opacity: 0.4; stroke-dashoffset: 0; }
+  50%      { opacity: 0.9; stroke-dashoffset: 12; }
+}
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.animate-glow-line {
+  animation: glowLine 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-subtle, .animate-glow-line {
+    animation: none !important;
+  }
+}
+
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Drag scroll */
+.grab-cursor { cursor: grab; user-select: none; }
+.grab-cursor:active { cursor: grabbing; }
+
+/* ===== ORIGINAL PAGE CSS ===== */
+.font-display { font-family: 'Montserrat', 'Inter', sans-serif; }
+.font-script  { font-family: 'Caveat', cursive; }
+
+/* Blueprint micro-grid */
 .bg-tech-grid {
   background-color: #F8F9FB;
   background-image:
@@ -501,26 +721,47 @@ body {
     linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
   background-size: 32px 32px, 64px 64px, 64px 64px;
-}
-.circuit-bg {
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(243, 90, 16, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 90% 40%, rgba(243, 90, 16, 0.03) 0%, transparent 50%),
-    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-}
-.technical-grid {
-  background-image:
-    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-position: 0 0, 0 0, 0 0;
 }
 
-/* Glow effects */
+/* Orange circuit trace glow */
 .circuit-glow {
   filter: drop-shadow(0 0 6px rgba(249, 90, 0, 0.65)) drop-shadow(0 0 12px rgba(249, 90, 0, 0.35));
 }
+
+/* Isometric plinth pedestal glow */
+.pedestal-glow {
+  box-shadow:
+    0 14px 28px -6px rgba(249, 90, 0, 0.3),
+    0 4px 10px -2px rgba(15, 23, 42, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(249, 90, 0, 0.4);
+}
+
+/* 3D stage base bevel */
+.plinth-base {
+  background: linear-gradient(180deg, #1e2430 0%, #0d121c 100%);
+  border: 1.5px solid #F95A00;
+  position: relative;
+}
+.plinth-base::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(249,90,0,0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.blueprint-grid {
+  background-color: #FAFAFC;
+  background-image:
+    linear-gradient(to right, rgba(220, 226, 235, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 226, 235, 0.45) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Ambient Circuit Glow Elements */
 .circuit-glow-line {
   background: linear-gradient(90deg,
     rgba(243, 112, 33, 0) 0%,
@@ -530,30 +771,8 @@ body {
     rgba(243, 112, 33, 0) 100%);
   box-shadow: 0 0 16px rgba(243, 112, 33, 0.6), 0 0 32px rgba(243, 112, 33, 0.3);
 }
-.sine-wave-glow { filter: drop-shadow(0 0 6px #F35A10); }
-.orb-pulse      { box-shadow: 0 0 25px 8px rgba(243, 90, 16, 0.35); }
 
-/* 3D pedestal / plinth */
-.pedestal-glow {
-  box-shadow:
-    0 14px 28px -6px rgba(249, 90, 0, 0.3),
-    0 4px 10px -2px rgba(15, 23, 42, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -2px 6px rgba(249, 90, 0, 0.4);
-}
-.plinth-base {
-  position: relative;
-  background: linear-gradient(180deg, #1e2430 0%, #0d121c 100%);
-  border: 1.5px solid #F95A00;
-}
-.plinth-base::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(249, 90, 0, 0.6) 0%, transparent 60%);
-  pointer-events: none;
-}
+/* Perspective 3D Stage Hexagon */
 .pedestal-base {
   filter: drop-shadow(0 14px 24px rgba(243, 112, 33, 0.28));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
@@ -570,373 +789,158 @@ body {
   transform: scale(1.08);
 }
 
-.hexagon-badge { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+/* Clip path for hexagon icon markers */
+.hexagon-badge {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
 
-/* Watermark "S" (responsive size) */
+/* Watermark S Silhouette Background */
 .watermark-s {
   position: absolute;
   right: 12%;
   top: 3%;
-  width: clamp(220px, 40vw, 480px);
-  height: auto;
-  aspect-ratio: 480 / 520;
+  width: 480px;
+  height: 520px;
   opacity: 0.035;
   pointer-events: none;
   z-index: 1;
 }
 
-/* Touch devices par hover-lift hata do (tap par atka rehta hai) */
-@media (hover: none) {
-  .pipeline-card:hover .pedestal-base { transform: none; }
-  .pipeline-card:hover .action-button { transform: none; }
+.circuit-bg {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(243, 90, 16, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 40%, rgba(243, 90, 16, 0.03) 0%, transparent 50%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
 }
-
-
-/* ==========================================================================
-   9. FOOTER  (.sk-footer)
-   --------------------------------------------------------------------------
-   Desktop (>=1280px): 2048x768 design, --px unit se proportionally scale.
-   Tablet / Mobile    : stacked layout (neeche container queries).
-   Background image   : footer-bg.webp (same folder me rakho)
-   ========================================================================== */
-.sk-footer {
-  container-type: inline-size;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
+.technical-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
+.sine-wave-glow { filter: drop-shadow(0 0 6px #F35A10); }
+.orb-pulse { box-shadow: 0 0 25px 8px rgba(243, 90, 16, 0.35); }
 
-.sk-stage {
-  --px: calc(100cqw / 2048);
-  position: relative;
-  width: 100%;
-  aspect-ratio: 2048 / 768;
-  overflow: hidden;
-  color: #1c1c1c;
-  background: url('footer-bg.webp') center / 100% 100% no-repeat;
+body { font-family: 'Inter', sans-serif; }
+.hero-gradient {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%);
 }
-
-/* ---------- Center content div ---------- */
-.sk-card {
+.navbar::after {
+  content: "";
   position: absolute;
-  left: calc(var(--px) * 155);
-  top: calc(var(--px) * 155);
-  width: calc(var(--px) * 1805);
-  height: calc(var(--px) * 355);
-  display: grid;
-  grid-template-columns:
-    calc(var(--px) * 482)    /* brand */
-    calc(var(--px) * 240)    /* platform */
-    calc(var(--px) * 271)    /* labs */
-    calc(var(--px) * 194)    /* resources */
-    calc(var(--px) * 173)    /* company */
-    calc(var(--px) * 445);   /* stay updated */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00f0ff, #2ed3e2, #7b61ff, #00f0ff);
+  background-size: 300% 100%;
+  animation: gradientMove 6s linear infinite;
 }
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+/* ===== SARKIT LAB HERO SECTION CSS =====
+   Isko apne page ke <style> me paste karo */
 
-/* ---------- Brand ---------- */
-.sk-brand { padding-right: calc(var(--px) * 40); }
-
-.sk-logo {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--px) * 14);
-  height: calc(var(--px) * 76);
-  margin-top: calc(var(--px) * 3);
+#lab-hero {
+  background-color: #FAF9F6;
+  color: #1e293b;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
-.sk-logo svg { flex-shrink: 0; width: calc(var(--px) * 76); height: calc(var(--px) * 76); }
-.sk-logo-title {
-  font-size: calc(var(--px) * 48);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: #1a1a1a;
-}
-.sk-logo-title span { font-weight: 400; }
-.sk-logo-sub {
-  margin-top: calc(var(--px) * 4);
-  font-size: calc(var(--px) * 23);
-  font-weight: 500;
-  line-height: 1;
-  color: #4b5563;
-}
-
-.sk-desc {
-  width: calc(var(--px) * 450);
-  margin: calc(var(--px) * 30) 0 0;
-  font-size: calc(var(--px) * 21);
-  line-height: calc(var(--px) * 28.5);
-  color: #4a4a4a;
-}
-.sk-desc b { font-weight: 600; color: #1a1a1a; }
-
-.sk-features {
-  display: flex;
-  margin: calc(var(--px) * 30) 0 0 calc(var(--px) * -16);
-}
-.sk-feature {
-  padding: 0 calc(var(--px) * 15);
-  border-right: calc(var(--px) * 1) solid rgba(0, 0, 0, 0.18);
-  text-align: center;
-  font-size: calc(var(--px) * 15.5);
-  line-height: 1.28;
-  color: #333;
-}
-.sk-feature:last-child { border-right: 0; }
-.sk-feature svg {
-  display: block;
-  width: calc(var(--px) * 44);
-  height: calc(var(--px) * 44);
-  margin: 0 auto calc(var(--px) * 9);
-  color: #f26a1b;
-}
-
-/* ---------- Link columns ---------- */
-.sk-col { padding-top: calc(var(--px) * 24); }
-.sk-col--first {
-  padding-left: calc(var(--px) * 44);
-  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
-}
-.sk-col h4 {
-  margin: 0;
-  font-size: calc(var(--px) * 24);
-  font-weight: 800;
-  line-height: calc(var(--px) * 30);
-  letter-spacing: -0.01em;
-  color: #111;
-}
-.sk-col h4::after {
-  content: '';
-  display: block;
-  width: calc(var(--px) * 50);
-  height: calc(var(--px) * 3);
-  margin-top: calc(var(--px) * 7);
-  border-radius: 99px;
-  background: #f26a1b;
-}
-.sk-col ul { margin: calc(var(--px) * 21) 0 0; padding: 0; list-style: none; }
-.sk-col li { display: flex; align-items: center; height: calc(var(--px) * 42.4); }
-.sk-col a {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--px) * 14);
-  font-size: calc(var(--px) * 18.5);
-  color: #2a2a2a;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color .2s;
-}
-.sk-col a:hover { color: #f26a1b; }
-.sk-col a svg { flex-shrink: 0; width: calc(var(--px) * 15); height: calc(var(--px) * 15); color: #f26a1b; }
-
-/* ---------- Stay updated ---------- */
-.sk-updates {
-  padding: calc(var(--px) * 22) 0 0 calc(var(--px) * 48);
-  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
-}
-.sk-updates h3 {
-  margin: 0;
-  font-size: calc(var(--px) * 40);
-  font-weight: 800;
-  line-height: calc(var(--px) * 48);
-  letter-spacing: -0.02em;
-  color: #111;
-}
-.sk-updates h3 span { color: #f26a1b; }
-.sk-updates p {
-  width: calc(var(--px) * 360);
-  margin: calc(var(--px) * 10) 0 0;
-  font-size: calc(var(--px) * 20.5);
-  line-height: calc(var(--px) * 28);
-  color: #555;
-}
-
-.sk-form { display: flex; width: calc(var(--px) * 391); margin-top: calc(var(--px) * 29); }
-.sk-form input {
-  flex: 1;
-  min-width: 0;
-  height: calc(var(--px) * 48);
-  padding: 0 calc(var(--px) * 14);
-  border: calc(var(--px) * 1) solid #d9d4cc;
-  border-right: 0;
-  border-radius: calc(var(--px) * 8) 0 0 calc(var(--px) * 8);
-  background: rgba(255, 255, 255, 0.85);
-  font: 400 calc(var(--px) * 18.5) 'Inter', sans-serif;
-  color: #333;
-  outline: none;
-}
-.sk-form input::placeholder { color: #8a8a8a; }
-.sk-form input:focus { border-color: #f26a1b; }
-.sk-form button {
-  height: calc(var(--px) * 48);
-  padding: 0 calc(var(--px) * 24);
-  border: 0;
-  border-radius: 0 calc(var(--px) * 8) calc(var(--px) * 8) 0;
-  background: #f26a1b;
-  font: 600 calc(var(--px) * 19) 'Inter', sans-serif;
+#lab-hero ::selection {
+  background: #f97316;
   color: #fff;
-  cursor: pointer;
-  transition: background .2s;
 }
-.sk-form button:hover { background: #d95a10; }
 
-.sk-social { display: flex; align-items: center; gap: calc(var(--px) * 36); margin: calc(var(--px) * 40) 0 0 calc(var(--px) * 1); }
-.sk-social a { display: block; color: #111; transition: color .2s; }
-.sk-social a:hover { color: #f26a1b; }
-.sk-social svg { display: block; width: calc(var(--px) * 41); height: calc(var(--px) * 41); }
-.sk-join { margin-top: calc(var(--px) * 8); font-size: calc(var(--px) * 20.5); color: #222; }
+/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
+#lab-hero .font-lab-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+#lab-hero .font-lab-mono { font-family: 'JetBrains Mono', monospace; }
 
-/* ---------- Bottom bar ---------- */
-.sk-bottom {
-  position: absolute;
-  left: calc(var(--px) * 418);
-  top: calc(var(--px) * 580);
-  width: calc(var(--px) * 1312);
-  display: flex;
-  justify-content: space-between;
-  padding-top: calc(var(--px) * 29);
-  border-top: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.55);
-  font-size: calc(var(--px) * 15.5);
-  color: #333;
+/* Subtle warm ambient laboratory backdrop simulation */
+.lab-hero-bg {
+  background: radial-gradient(circle at 85% 35%, rgba(241, 90, 36, 0.08) 0%, rgba(255, 247, 237, 0.4) 30%, #fcfbf9 75%);
 }
-.sk-bottom b { font-weight: 700; color: #111; }
-.sk-legal { display: flex; align-items: center; margin-right: calc(var(--px) * 112); }
-.sk-legal a { color: #222; text-decoration: none; }
-.sk-legal a:hover { color: #f26a1b; }
-.sk-legal i { width: calc(var(--px) * 1.5); height: calc(var(--px) * 15); margin: 0 calc(var(--px) * 16); background: #222; }
 
-/* ---------- Handwritten notes ---------- */
-.sk-note-left,
-.sk-note-right {
-  position: absolute;
-  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
-  font-weight: 500;
-  color: #1a1a1a;
+/* Monitor Display 3D / Perspective Styling */
+.monitor-frame {
+  box-shadow:
+    0 25px 50px -12px rgba(15, 23, 42, 0.35),
+    0 0 0 1px rgba(15, 23, 42, 0.8),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+  border: 7px solid #1a1e24;
+  border-radius: 20px;
 }
-.sk-note-left span,
-.sk-note-right span { display: block; white-space: nowrap; }
 
-.sk-note-left {
-  left: calc(var(--px) * 165);
-  top: calc(var(--px) * 566);
-  font-size: calc(var(--px) * 36);
+.monitor-stand {
+  background: linear-gradient(180deg, #2b303c 0%, #171a21 100%);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Circuit Wire Simulation styling */
+.wire-curved {
+  stroke-linecap: round;
+  fill: none;
+  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.15));
+}
+
+/* .no-scrollbar pehle se tumhare CSS me hai (audience-gateway.css me).
+   Agar nahi hai to ye 2 lines add kar lo: */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== BENTO ECOSYSTEM SECTION CSS =====
+   Isko apne dusre page ke <style> me paste karo */
+
+#bento-ecosystem {
+  background-color: #f8f9ff;
+  color: #0b1c30;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+#bento-ecosystem ::selection {
+  background: #f37021;
+  color: #fff;
+}
+
+/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
+#bento-ecosystem .font-bento-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+#bento-ecosystem .font-bento-mono    { font-family: 'JetBrains Mono', monospace; }
+
+.glow-orange { box-shadow: 0 0 35px -5px rgba(243, 112, 33, 0.25); }
+.glow-cyan   { box-shadow: 0 0 35px -5px rgba(58, 158, 226, 0.2); }
+
+.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
+
+.circuit-dot-grid {
+  background-image: radial-gradient(rgba(160, 65, 0, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Material Symbols icon base (font link ke saath kaam karta hai) */
+#bento-ecosystem .material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
   line-height: 1;
-  transform: rotate(-13deg);
-  transform-origin: left top;
-}
-.sk-note-left span:nth-child(2) { padding-left: calc(var(--px) * 12); }
-.sk-note-left span:nth-child(3) { padding-left: calc(var(--px) * 22); }
-.sk-note-left span:nth-child(4) { padding-left: calc(var(--px) * 30); }
-
-.sk-arrow {
-  position: absolute;
-  left: calc(var(--px) * 285);
-  top: calc(var(--px) * 578);
-  width: calc(var(--px) * 90);
-  height: calc(var(--px) * 76);
-  color: #1a1a1a;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
-.sk-note-right {
-  left: calc(var(--px) * 1840);
-  top: calc(var(--px) * 640);
-  font-size: calc(var(--px) * 34);
-  line-height: 1.05;
-  transform: rotate(-23deg);
-  transform-origin: left bottom;
-}
-.sk-note-right span:nth-child(2) { padding-left: calc(var(--px) * 10); }
-.sk-note-right span:nth-child(3) { padding-left: calc(var(--px) * 20); }
-.sk-note-right::after {
-  content: '';
-  display: block;
-  width: calc(var(--px) * 175);
-  height: calc(var(--px) * 5);
-  margin: calc(var(--px) * 6) 0 0 calc(var(--px) * 8);
-  border-radius: 99px;
-  background: #f26a1b;
-  transform: rotate(-2deg);
-}
+/* Switcher tile transitions */
+#bento-ecosystem .bento-tile { transition: all .3s ease; }
 
-/* ---------- Footer: tablet + mobile (stacked) ---------- */
-@container (max-width: 1279px) {
-  .sk-stage {
-    --px: 1px;
-    aspect-ratio: auto;
-    padding: 48px 24px 28px;
-    background-size: cover;
-  }
-  .sk-card {
-    position: static;
-    width: auto;
-    max-width: 1100px;
-    height: auto;
-    margin: 0 auto;
-    padding: 32px 28px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 32px 24px;
-    border-radius: 24px;
-    background: rgba(246, 241, 233, 0.92);
-  }
-  .sk-brand { grid-column: 1 / -1; padding: 0; }
-  .sk-desc  { width: auto; max-width: 620px; }
-  .sk-features { flex-wrap: wrap; margin-left: 0; row-gap: 18px; }
-  .sk-feature:first-child { padding-left: 0; }
-
-  .sk-col,
-  .sk-col--first { padding: 0; border-left: 0; }
-  .sk-col li { height: auto; min-height: 36px; }
-  .sk-col a  { white-space: normal; }
-
-  .sk-updates {
-    grid-column: 1 / -1;
-    padding: 28px 0 0;
-    border-left: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-  }
-  .sk-updates p { width: auto; }
-  .sk-form { width: 100%; max-width: 440px; }
-
-  .sk-bottom {
-    position: static;
-    width: auto;
-    max-width: 1100px;
-    margin: 22px auto 0;
-    padding: 14px 20px;
-    flex-wrap: wrap;
-    gap: 10px 24px;
-    border-top: 0;
-    border-radius: 14px;
-    background: rgba(246, 241, 233, 0.92);
-  }
-  .sk-legal { margin-right: 0; flex-wrap: wrap; row-gap: 6px; }
-
-  .sk-note-left,
-  .sk-note-right,
-  .sk-arrow { display: none; }
-}
-
-@container (max-width: 799px) {
-  .sk-stage { padding: 32px 14px 22px; }
-  .sk-card  { padding: 26px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sk-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 0; }
-  .sk-feature  { padding: 0 10px; border-right: 0; }
-  .sk-feature:first-child { padding-left: 10px; }
-}
-
-@container (max-width: 479px) {
-  .sk-stage { --px: .78px; }
-  .sk-form input { font-size: 16px; }   /* iOS auto-zoom rokne ke liye */
-}
-
-
-/* ==========================================================================
-   10. REDUCED MOTION
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-subtle,
-  .animate-glow-line,
-  .animated-sine,
-  .navbar::after { animation: none !important; }
-}
     </style>
 </head>
 <body class="bg-gray-50">
