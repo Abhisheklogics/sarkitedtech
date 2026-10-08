@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SARKIT EdTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%);
+        }
+                .navbar::after{
+content:"";
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+height:3px;
+
+background:linear-gradient(
+90deg,
+#00f0ff,
+#2ed3e2,
+#7b61ff,
+#00f0ff
+);
+
+background-size:300% 100%;
+animation:gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
+}
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+
+<nav  class="sticky top-0 left-0 w-full z-50 bg-sky-950 navbar">
+    <div class="flex flex-col w-full">
+        <div class="flex justify-between items-center px-4 sm:px-6 md:px-20 h-16 md:h-20 text-white bg-gradient-to-b from-black/60 to-transparent">
+         
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10">
+                   <div class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 overflow-hidden bg-white/10 rounded-lg">
+        <img src="favicon.ico" alt="Logo" class="w-full h-full object-contain p-1" />
+    </div>
+                </div>
+                <div class="leading-none">
+                    <h1 class="text-lg sm:text-xl md:text-2xl font-bold tracking-tight">SARKIT EdTech</h1>
+                    <p class="text-[6px] sm:text-[8px] md:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] font-light text-gray-300">SOLUTIONS</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center">
+                <ul class="flex items-center text-[11px] font-semibold tracking-[0.15em]">
+                   <li id="nav-home" class="cursor-pointer"><a href="index.html">HOME</a></li>
+    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+
+                    <li class="relative group py-2">
+                        <div class="flex flex-col items-center">
+                            <span class="cursor-pointer">SOLUTIONS</span>
+                            <div class="flex space-x-3 mt-1 font-normal text-gray-400 whitespace-nowrap">
+                                <span class="hover:text-white cursor-pointer" id="nav-labsetup"><a href="labsetup.html">Lab Setups</a></span>
+                                <span class="hover:text-white cursor-pointer" id="nav-vlab"><a href="vlab.html">Virtual Labs</a></span>
+                                <span class="hover:text-white cursor-pointer" id="nav-c"><a href="curriculum.html">Curriculum</a></span>
+                                <span class="hover:text-white cursor-pointer" id="nav-kits"><a href="kits.html">Kits</a></span>
+                            </div>
+                        </div>
+                    </li>
+
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                    <li class="hover:text-cyan-400 cursor-pointer uppercase">RESOURCES</li>
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                    <li class="hover:text-cyan-400 cursor-pointer uppercase">ABOUT</li>
+                    <span class="mx-4 text-gray-500 font-extralight text-sm">|</span>
+                   <li id="nav-contact" class="cursor-pointer uppercase"><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-3xl focus:outline-none">☰</button>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="fixed inset-0 bg-black/50 z-50 md:hidden translate-x-full transition-transform duration-300 rounded-lg">
+    <div class="absolute right-0 top-0 h-fit w-64 bg-sky-900 text-white p-6">
+        <button id="menu-close" class="absolute top-4 right-4 text-3xl">&times;</button>
+        <ul class="mt-4 space-y-4 text-sm font-semibold">
+            <li class="text-cyan-100" id="nav-home"><a href="index.html">HOME</a></li>
+            <li class="border-t border-white/10 pt-2">SOLUTIONS</li>
+ <li  class="pl-4 text-xs text-gray-300" id="nav-labsetup"><a href="labsetup.html"> Lab Setups</a></li>
+            <li class="pl-4 text-xs text-gray-300"  id="nav-vlab"><a href="vlab.html">Virtual Labs</a></li>
+            <li class="pl-4 text-xs text-gray-300" id="nav-c"><a href="curriculum.html">Curriculum</a></li>
+            <li class="pl-4 text-xs text-gray-300" id="nav-kits"><a href="kits.html">Kits</a></li>
+            <li class="border-t border-white/10 pt-2">RESOURCES</li>
+                                <li class="hover:text-cyan-400 cursor-pointer uppercase">ABOUT</li>
+            <li><a href="contact.html" id="nav-contact" id="nav-contact">CONTACT</a></li>
+        </ul>
+    </div>
+</div>
+
+<section class="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-20 py-20 overflow-hidden">
+
+    <!-- BACKGROUND -->
+    <div class="absolute inset-0 z-0">
+        <img src="./design.jpg" class="w-full h-full object-cover opacity-90">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-800 via-black/80 to-sky-700"></div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="relative z-10 w-full max-w-4xl">
+
+        <div class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6 sm:p-10">
+
+            <!-- HEADING -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white">
+                    Contact Us
+                </h2>
+                <p class="text-gray-300 mt-3 text-sm md:text-base">
+                    Reach out instantly via call, WhatsApp, email or location.
+                </p>
+            </div>
+
+            <!-- CONTACT GRID -->
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- PHONE -->
+                <a href="tel:+919876543210"
+                   class="bg-white/10 border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:scale-105 transition">
+
+                    <div class="text-3xl">📞</div>
+
+                    <div>
+                        <h3 class="text-white font-semibold">Call Us</h3>
+                        <p class="text-gray-300 text-sm">+91 9027846210</p>
+                    </div>
+
+                </a>
+
+                <!-- WHATSAPP -->
+                <a href="https://wa.me/919876543210?text=Hi%20mujhe%20aapke%20STEM%20solutions%20ke%20bare%20me%20janna%20hai"
+                   target="_blank"
+                   class="bg-white/10 border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:scale-105 transition">
+
+                    <div class="text-3xl">💬</div>
+
+                    <div>
+                        <h3 class="text-white font-semibold">WhatsApp</h3>
+                        <p class="text-gray-300 text-sm">Chat instantly</p>
+                    </div>
+
+                </a>
+
+                <!-- EMAIL -->
+                <a href="mailto:support@sarkit.com"
+                   class="bg-white/10 border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:scale-105 transition">
+
+                    <div class="text-3xl">📧</div>
+
+                    <div>
+                        <h3 class="text-white font-semibold">Email</h3>
+                        <p class="text-gray-300 text-sm">support@sarkitedtech.com</p>
+                    </div>
+
+                </a>
+
+                <!-- LOCATION -->
+                <a href="https://maps.google.com/?q=Agra+Uttar+Pradesh"
+                   target="_blank"
+                   class="bg-white/10 border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:scale-105 transition">
+
+                    <div class="text-3xl">📍</div>
+
+                    <div>
+                        <h3 class="text-white font-semibold">Location</h3>
+                        <p class="text-gray-300 text-sm">Vaishali Nagar, Jaipur</p>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="bg-slate-900 text-white py-8 sm:py-12 px-4 sm:px-6 md:px-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12">
+        <div>
+            <h3 class="text-lg sm:text-xl font-bold text-cyan-400 mb-3 sm:mb-4 uppercase tracking-tighter">SARKIT EdTech</h3>
+            <p class="text-xs sm:text-sm text-gray-400">Comprehensive STEM, AI, and Robotics Solutions for schools and educational institutions globally.</p>
+        </div>
+        <div>
+            <h4 class="font-bold mb-3 sm:mb-4 uppercase text-[10px] sm:text-xs tracking-widest text-gray-400">Navigation</h4>
+            <ul class="text-xs sm:text-sm space-y-1.5 sm:space-y-2 text-gray-300">
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="vlab.html">Virtual Labs</a></li>
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="kits.html">Educational Kits</a></li>
+                <li class="hover:text-cyan-400 cursor-pointer"><a href="contact.html" id="nav-contact">Contact Support</a></li>
+            </ul>
+        </div>
+        <div class="sm:col-span-2 md:col-span-1">
+            <h4 class="font-bold mb-3 sm:mb-4 uppercase text-[10px] sm:text-xs tracking-widest text-gray-400">Location</h4>
+            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Vaishali Nagar, PIN - 302021<br>Jaipur<br>Rajasthan, India</p>
+        </div>
+    </div>
+    <div class="text-center mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/5 text-[8px] sm:text-[10px] text-gray-500 uppercase tracking-widest">
+        © 2024 SARKIT EdTech. Built for Future Innovators.
+    </div>
+</footer>
+
+<script src="./script.js">
+   
+   
+</script>
+
+</body>
+</html>
