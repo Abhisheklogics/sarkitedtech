@@ -1,0 +1,17 @@
+{
+  "name": "sarkitedtech",
+  "version": "1.0.0",
+  "description": "\u0000#\u0000 \u0000s\u0000a\u0000r\u0000k\u0000i\u0000t\u0000e\u0000d\u0000t\u0000e\u0000c\u0000h\u0000\r\u0000 \u0000",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.29",
+    "tailwindcss": "^3.4.19"
+  }
+}
