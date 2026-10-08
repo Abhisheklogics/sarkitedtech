@@ -61,9 +61,15 @@
                 "background": "#f8f9ff",
                 "error-container": "#ffdad6",
                 "on-surface-variant": "#584237",
-                "surface-container-low": "#eff4ff"
+                "surface-container-low": "#eff4ff",
+                 orange: '#f37021',
+              dark: '#111827',
+              muted: '#6b7280',
+              accent: '#ff8a3d'
               }
+              
           }
+          
         }
       };
     </script>
@@ -80,18 +86,279 @@
 
     <!-- 5) CSS -->
 <style>
-/* ===== AUDIENCE GATEWAY SECTION CSS =====
-   Isko apne dusre page ke <style> me paste karo */
+/* ==========================================================================
+   SARKIT - MASTER STYLESHEET  (de-duplicated + responsive)
+   --------------------------------------------------------------------------
+   CONTENTS
+     0.  Base & shared utilities
+     1.  Shared grid backgrounds (.blueprint-grid)
+     2.  SARKIT LAB  - Laboratories showcase
+     3.  SARKITSHALA - Hero
+     4.  SARKIT Ecosystem - "Choose your path" (panoramic board)
+     5.  Audience Gateway          (#audience-gateway)
+     6.  Lab Hero                  (#lab-hero)
+     7.  Bento Ecosystem           (#bento-ecosystem)
+     8.  Pipeline / Original page  (hero-gradient, navbar, pipeline cards)
+     9.  Footer                    (.sk-footer)
+     10. Reduced motion
+   ========================================================================== */
 
-#audience-gateway {
+
+/* ==========================================================================
+   0. BASE & SHARED UTILITIES
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fbfbfd;
+  overflow-x: hidden;
+  overflow-x: clip;               /* sticky ko break nahi karta */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Optional helpers */
+.font-inter   { font-family: 'Inter', sans-serif; }
+.font-display { font-family: 'Montserrat', 'Inter', sans-serif; }
+.font-script  { font-family: 'Caveat', cursive; }
+
+/* Scrollbar hide (sirf ek baar) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Thin custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
+
+/* Drag scroll */
+.grab-cursor { cursor: grab; user-select: none; }
+.grab-cursor:active { cursor: grabbing; }
+
+/* Tailwind config me jo brand shades nahi hain (400 / 200 / 300) unke fix */
+.text-brand-400 { color: #fb923c; }
+.border-brand-200 { border-color: #fed7aa; }
+.border-brand-300,
+.hover\:border-brand-300:hover { border-color: #fdba74; }
+
+
+/* ==========================================================================
+   1. SHARED GRID BACKGROUNDS
+   --------------------------------------------------------------------------
+   .blueprint-grid         -> slate grid (Pipeline page)
+   .blueprint-grid--orange -> orange tint grid (Laboratories showcase)
+   NOTE: Laboratories section me class add karo:
+         class="... blueprint-grid blueprint-grid--orange ..."
+   ========================================================================== */
+.blueprint-grid {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FAFAFC;
+  background-image:
+    linear-gradient(to right, rgba(220, 226, 235, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(220, 226, 235, 0.45) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
-#audience-gateway .font-sans {
+.blueprint-grid.blueprint-grid--orange,
+.blueprint-grid--orange {
+  background-color: #FBFBFD;
+  background-image:
+    linear-gradient(to right, rgba(243, 112, 33, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(243, 112, 33, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+
+/* ==========================================================================
+   2. SARKIT LAB - LABORATORIES SHOWCASE
+   ========================================================================== */
+/* Oscilloscope sine wave */
+@keyframes waveDash {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 160; }
+}
+.animated-sine {
+  stroke-dasharray: 6, 3;
+  animation: waveDash 8s linear infinite;
+}
+
+
+/* ==========================================================================
+   3. SARKITSHALA - HERO
+   ========================================================================== */
+.bg-circuit-grid {
   font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fcfcfc;
+  background-image:
+    radial-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(to right, rgba(241, 245, 249, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(241, 245, 249, 0.6) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
 }
-#audience-gateway .font-handwriting {
-  font-family: 'Caveat', cursive;
+
+.desk-glow {
+  background: radial-gradient(circle at 60% 40%, rgba(254, 215, 170, 0.35) 0%, rgba(255, 247, 237, 0.15) 45%, transparent 70%);
 }
+
+.laptop-frame      { box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1); }
+.laptop-base-shadow{ box-shadow: 0 35px 35px -10px rgba(15, 23, 42, 0.45); }
+
+/* FIX: HTML me lg:col-span-3.5 / 5.5 use hua hai, jo Tailwind me exist nahi karta.
+   Isse tablet (1024-1279px) par columns 1/12 width me toot jate the. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .lg\:col-span-3\.5 { grid-column: span 3 / span 3; }
+  .lg\:col-span-5\.5 { grid-column: span 6 / span 6; }
+}
+
+
+/* ==========================================================================
+   4. SARKIT ECOSYSTEM - "CHOOSE YOUR PATH" (panoramic board)
+   ========================================================================== */
+.panoramic-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 2048px;
+  height: 768px;
+  margin-inline: auto;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fbfcfd;
+  background-image:
+    radial-gradient(circle at 50% 120px, rgba(249, 115, 22, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+/* FIX: HTML me p-4.5 hai (Tailwind me nahi) -> card ka padding gayab tha */
+.glow-orange-soft {
+  padding: 1.125rem;
+  box-shadow: 0 10px 40px -10px rgba(234, 88, 12, 0.15), 0 0 20px 2px rgba(249, 115, 22, 0.08);
+}
+
+.laptop-glow-left,
+.laptop-glow-right {
+  position: absolute;
+  bottom: 60px;
+  width: 550px;
+  height: 70px;
+  background: radial-gradient(ellipse, rgba(234, 88, 12, 0.14) 0%, rgba(249, 115, 22, 0) 70%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+.laptop-glow-left  { left: 100px; }
+.laptop-glow-right { right: 100px; }
+
+/* Laptop hardware */
+.laptop-chassis {
+  position: relative;
+  background: #111827;
+  border-radius: 14px 14px 2px 2px;
+  border: 6px solid #1f2937;
+  border-bottom: 3px solid #111827;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
+}
+.laptop-camera-notch {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #374151;
+  transform: translateX(-50%);
+}
+.laptop-base {
+  position: relative;
+  height: 12px;
+  margin: 0 -22px;
+  border-radius: 0 0 14px 14px;
+  background: linear-gradient(180deg, #d1d5db 0%, #9ca3af 60%, #6b7280 100%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.laptop-base::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 70px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: #6b7280;
+  transform: translateX(-50%);
+}
+
+/* ---- Responsive: board ab fixed 2048px nahi, fluid hai ---- */
+@media (max-width: 1860px) {
+  .panoramic-canvas { height: auto; }
+
+  /* Main stage: flex -> grid (center card upar, dono laptops neeche) */
+  .panoramic-canvas :has(> [class*="w-[620px]"]) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 620px));
+    justify-content: center;
+    align-items: start;
+    gap: 48px 40px;
+    padding-top: 12px;
+  }
+  .panoramic-canvas [class*="w-[620px]"] { width: 100%; }
+  .panoramic-canvas [class*="w-[520px]"] {
+    width: 100%;
+    max-width: 520px;
+    grid-column: 1 / -1;
+    justify-self: center;
+    order: -1;
+  }
+
+  /* Bottom "Recommended path" strip */
+  .panoramic-canvas > footer { flex-wrap: wrap; }
+  .panoramic-canvas > footer > [class*="w-56"] {
+    width: 100%;
+    padding: 0 0 8px;
+    border-right: 0;
+  }
+  .panoramic-canvas > footer > .grid {
+    flex-basis: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+}
+
+@media (max-width: 1380px) {
+  .panoramic-canvas :has(> [class*="w-[620px]"]) { grid-template-columns: minmax(0, 620px); }
+}
+
+@media (max-width: 1100px) {
+  /* Side watermarks headline se takrate hain */
+  .panoramic-canvas > header > .absolute { display: none; }
+}
+
+@media (max-width: 767px) {
+  .laptop-glow-left, .laptop-glow-right { display: none; }
+  .laptop-base { margin: 0 -10px; }
+  .panoramic-canvas { padding: 16px; }
+  .panoramic-canvas h1 { font-size: 1.75rem; line-height: 1.15; }
+  .panoramic-canvas .glow-orange-soft { padding: 0.9rem; }
+  /* Laptop ke neeche wale feature pills wrap ho jayein */
+  .panoramic-canvas [class*="w-[620px]"] > .mt-4 { flex-wrap: wrap; justify-content: center; }
+  /* Laptop screen ke andar ke side panels chhote screen par hide */
+  .panoramic-canvas .laptop-chassis [class*="w-36"],
+  .panoramic-canvas .laptop-chassis [class*="w-28"] { display: none; }
+}
+
+@media (max-width: 479px) {
+  .panoramic-canvas .laptop-chassis [class*="w-24"] { display: none; }
+  .panoramic-canvas .glow-orange-soft .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+/* ==========================================================================
+   5. AUDIENCE GATEWAY  (#audience-gateway)
+   ========================================================================== */
+#audience-gateway,
+#audience-gateway .font-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
+#audience-gateway .font-handwriting { font-family: 'Caveat', cursive; }
 
 .tech-grid-pattern {
   background-color: #f8faff;
@@ -103,10 +370,9 @@
 }
 
 .card-photo-overlay {
-  background: linear-gradient(180deg, rgba(11,28,48,0) 45%, rgba(11,28,48,0.55) 100%);
+  background: linear-gradient(180deg, rgba(11, 28, 48, 0) 45%, rgba(11, 28, 48, 0.55) 100%);
 }
 
-/* Tailwind config ki jagah plain CSS animations (dusre page me config nahi chahiye) */
 @keyframes pulseSubtle {
   0%, 100% { opacity: 0.8; transform: scale(1); }
   50%      { opacity: 0.4; transform: scale(1.05); }
@@ -120,97 +386,73 @@
   transform-origin: center;
   transform-box: fill-box;
 }
-.animate-glow-line {
-  animation: glowLine 4s ease-in-out infinite;
-}
+.animate-glow-line { animation: glowLine 4s ease-in-out infinite; }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-subtle, .animate-glow-line {
-    animation: none !important;
-  }
-}
 
-/* Hide scrollbars */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Drag scroll */
-.grab-cursor { cursor: grab; user-select: none; }
-.grab-cursor:active { cursor: grabbing; }
-
+/* ==========================================================================
+   6. LAB HERO  (#lab-hero)
+   ========================================================================== */
 #lab-hero {
   background-color: #FAF9F6;
   color: #1e293b;
   font-family: 'Plus Jakarta Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-#lab-hero ::selection {
-  background: #f97316;
-  color: #fff;
-}
-
-/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
+#lab-hero ::selection { background: #f97316; color: #fff; }
 #lab-hero .font-lab-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
 #lab-hero .font-lab-mono { font-family: 'JetBrains Mono', monospace; }
 
-/* Subtle warm ambient laboratory backdrop simulation */
 .lab-hero-bg {
   background: radial-gradient(circle at 85% 35%, rgba(241, 90, 36, 0.08) 0%, rgba(255, 247, 237, 0.4) 30%, #fcfbf9 75%);
 }
 
-/* Monitor Display 3D / Perspective Styling */
 .monitor-frame {
+  border: 7px solid #1a1e24;
+  border-radius: 20px;
   box-shadow:
     0 25px 50px -12px rgba(15, 23, 42, 0.35),
     0 0 0 1px rgba(15, 23, 42, 0.8),
     inset 0 0 0 2px rgba(255, 255, 255, 0.15);
-  border: 7px solid #1a1e24;
-  border-radius: 20px;
 }
-
 .monitor-stand {
   background: linear-gradient(180deg, #2b303c 0%, #171a21 100%);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
-/* Circuit Wire Simulation styling */
 .wire-curved {
-  stroke-linecap: round;
   fill: none;
-  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.15));
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
 }
 
-/* .no-scrollbar pehle se tumhare CSS me hai (audience-gateway.css me).
-   Agar nahi hai to ye 2 lines add kar lo: */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+@media (max-width: 639px) {
+  .monitor-frame { border-width: 4px; border-radius: 14px; }
+}
+
+
+/* ==========================================================================
+   7. BENTO ECOSYSTEM  (#bento-ecosystem)
+   ========================================================================== */
 #bento-ecosystem {
   background-color: #f8f9ff;
   color: #0b1c30;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-#bento-ecosystem ::selection {
-  background: #f37021;
-  color: #fff;
-}
-
-/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
+#bento-ecosystem ::selection { background: #f37021; color: #fff; }
 #bento-ecosystem .font-bento-display { font-family: 'Plus Jakarta Sans', sans-serif; }
 #bento-ecosystem .font-bento-mono    { font-family: 'JetBrains Mono', monospace; }
+#bento-ecosystem .bento-tile { transition: all .3s ease; }
 
 .glow-orange { box-shadow: 0 0 35px -5px rgba(243, 112, 33, 0.25); }
 .glow-cyan   { box-shadow: 0 0 35px -5px rgba(58, 158, 226, 0.2); }
-
-.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
 
 .circuit-dot-grid {
   background-image: radial-gradient(rgba(160, 65, 0, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Material Symbols icon base (font link ke saath kaam karta hai) */
+/* Material Symbols (font link ke saath) */
 #bento-ecosystem .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -227,71 +469,31 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Switcher tile transitions */
-#bento-ecosystem .bento-tile { transition: all .3s ease; }
 
-/* ===== AUDIENCE GATEWAY SECTION CSS ===== */
+/* ==========================================================================
+   8. PIPELINE / ORIGINAL PAGE
+   ========================================================================== */
+.hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%); }
 
-#audience-gateway {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+/* Navbar animated bottom line (FIX: ::after ke liye relative zaroori hai) */
+.navbar { position: relative; }
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00f0ff, #2ed3e2, #7b61ff, #00f0ff);
+  background-size: 300% 100%;
+  animation: gradientMove 6s linear infinite;
 }
-#audience-gateway .font-sans {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-#audience-gateway .font-handwriting {
-  font-family: 'Caveat', cursive;
-}
-
-.tech-grid-pattern {
-  background-color: #f8faff;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(203, 213, 225, 0.4) 1.2px, transparent 0),
-    linear-gradient(to right, rgba(226, 232, 240, 0.45) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.45) 1px, transparent 1px);
-  background-size: 24px 24px, 120px 120px, 120px 120px;
-}
-
-.card-photo-overlay {
-  background: linear-gradient(180deg, rgba(11,28,48,0) 45%, rgba(11,28,48,0.55) 100%);
+@keyframes gradientMove {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-/* Tailwind config ki jagah plain CSS animations (dusre page me config nahi chahiye) */
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50%      { opacity: 0.4; transform: scale(1.05); }
-}
-@keyframes glowLine {
-  0%, 100% { opacity: 0.4; stroke-dashoffset: 0; }
-  50%      { opacity: 0.9; stroke-dashoffset: 12; }
-}
-.animate-pulse-subtle {
-  animation: pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-.animate-glow-line {
-  animation: glowLine 4s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-subtle, .animate-glow-line {
-    animation: none !important;
-  }
-}
-
-/* Hide scrollbars */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Drag scroll */
-.grab-cursor { cursor: grab; user-select: none; }
-.grab-cursor:active { cursor: grabbing; }
-
-/* ===== ORIGINAL PAGE CSS ===== */
-.font-display { font-family: 'Montserrat', 'Inter', sans-serif; }
-.font-script  { font-family: 'Caveat', cursive; }
-
-/* Blueprint micro-grid */
+/* Backgrounds */
 .bg-tech-grid {
   background-color: #F8F9FB;
   background-image:
@@ -299,47 +501,26 @@
     linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
   background-size: 32px 32px, 64px 64px, 64px 64px;
-  background-position: 0 0, 0 0, 0 0;
+}
+.circuit-bg {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(243, 90, 16, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 40%, rgba(243, 90, 16, 0.03) 0%, transparent 50%),
+    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+.technical-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
-/* Orange circuit trace glow */
+/* Glow effects */
 .circuit-glow {
   filter: drop-shadow(0 0 6px rgba(249, 90, 0, 0.65)) drop-shadow(0 0 12px rgba(249, 90, 0, 0.35));
 }
-
-/* Isometric plinth pedestal glow */
-.pedestal-glow {
-  box-shadow:
-    0 14px 28px -6px rgba(249, 90, 0, 0.3),
-    0 4px 10px -2px rgba(15, 23, 42, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -2px 6px rgba(249, 90, 0, 0.4);
-}
-
-/* 3D stage base bevel */
-.plinth-base {
-  background: linear-gradient(180deg, #1e2430 0%, #0d121c 100%);
-  border: 1.5px solid #F95A00;
-  position: relative;
-}
-.plinth-base::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(180deg, rgba(249,90,0,0.6) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.blueprint-grid {
-  background-color: #FAFAFC;
-  background-image:
-    linear-gradient(to right, rgba(220, 226, 235, 0.45) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(220, 226, 235, 0.45) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Ambient Circuit Glow Elements */
 .circuit-glow-line {
   background: linear-gradient(90deg,
     rgba(243, 112, 33, 0) 0%,
@@ -349,8 +530,30 @@
     rgba(243, 112, 33, 0) 100%);
   box-shadow: 0 0 16px rgba(243, 112, 33, 0.6), 0 0 32px rgba(243, 112, 33, 0.3);
 }
+.sine-wave-glow { filter: drop-shadow(0 0 6px #F35A10); }
+.orb-pulse      { box-shadow: 0 0 25px 8px rgba(243, 90, 16, 0.35); }
 
-/* Perspective 3D Stage Hexagon */
+/* 3D pedestal / plinth */
+.pedestal-glow {
+  box-shadow:
+    0 14px 28px -6px rgba(249, 90, 0, 0.3),
+    0 4px 10px -2px rgba(15, 23, 42, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(249, 90, 0, 0.4);
+}
+.plinth-base {
+  position: relative;
+  background: linear-gradient(180deg, #1e2430 0%, #0d121c 100%);
+  border: 1.5px solid #F95A00;
+}
+.plinth-base::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(249, 90, 0, 0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
 .pedestal-base {
   filter: drop-shadow(0 14px 24px rgba(243, 112, 33, 0.28));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
@@ -367,168 +570,378 @@
   transform: scale(1.08);
 }
 
-/* Clip path for hexagon icon markers */
-.hexagon-badge {
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-}
+.hexagon-badge { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
 
-/* Watermark S Silhouette Background */
+/* Watermark "S" (responsive size) */
 .watermark-s {
   position: absolute;
   right: 12%;
   top: 3%;
-  width: 480px;
-  height: 520px;
+  width: clamp(220px, 40vw, 480px);
+  height: auto;
+  aspect-ratio: 480 / 520;
   opacity: 0.035;
   pointer-events: none;
   z-index: 1;
 }
 
-.circuit-bg {
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(243, 90, 16, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 90% 40%, rgba(243, 90, 16, 0.03) 0%, transparent 50%),
-    linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+/* Touch devices par hover-lift hata do (tap par atka rehta hai) */
+@media (hover: none) {
+  .pipeline-card:hover .pedestal-base { transform: none; }
+  .pipeline-card:hover .action-button { transform: none; }
 }
-.technical-grid {
-  background-image:
-    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
-  background-size: 16px 16px;
-}
-.sine-wave-glow { filter: drop-shadow(0 0 6px #F35A10); }
-.orb-pulse { box-shadow: 0 0 25px 8px rgba(243, 90, 16, 0.35); }
 
-body { font-family: 'Inter', sans-serif; }
-.hero-gradient {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #083344 100%);
-}
-.navbar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
+
+/* ==========================================================================
+   9. FOOTER  (.sk-footer)
+   --------------------------------------------------------------------------
+   Desktop (>=1280px): 2048x768 design, --px unit se proportionally scale.
+   Tablet / Mobile    : stacked layout (neeche container queries).
+   Background image   : footer-bg.webp (same folder me rakho)
+   ========================================================================== */
+.sk-footer {
+  container-type: inline-size;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, #00f0ff, #2ed3e2, #7b61ff, #00f0ff);
-  background-size: 300% 100%;
-  animation: gradientMove 6s linear infinite;
-}
-@keyframes gradientMove {
-  0%   { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-/* ===== SARKIT LAB HERO SECTION CSS =====
-   Isko apne page ke <style> me paste karo */
-
-#lab-hero {
-  background-color: #FAF9F6;
-  color: #1e293b;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-#lab-hero ::selection {
-  background: #f97316;
-  color: #fff;
-}
-
-/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
-#lab-hero .font-lab-sans { font-family: 'Plus Jakarta Sans', sans-serif; }
-#lab-hero .font-lab-mono { font-family: 'JetBrains Mono', monospace; }
-
-/* Subtle warm ambient laboratory backdrop simulation */
-.lab-hero-bg {
-  background: radial-gradient(circle at 85% 35%, rgba(241, 90, 36, 0.08) 0%, rgba(255, 247, 237, 0.4) 30%, #fcfbf9 75%);
-}
-
-/* Monitor Display 3D / Perspective Styling */
-.monitor-frame {
-  box-shadow:
-    0 25px 50px -12px rgba(15, 23, 42, 0.35),
-    0 0 0 1px rgba(15, 23, 42, 0.8),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.15);
-  border: 7px solid #1a1e24;
-  border-radius: 20px;
-}
-
-.monitor-stand {
-  background: linear-gradient(180deg, #2b303c 0%, #171a21 100%);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-}
-
-/* Circuit Wire Simulation styling */
-.wire-curved {
-  stroke-linecap: round;
-  fill: none;
-  filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.15));
-}
-
-/* .no-scrollbar pehle se tumhare CSS me hai (audience-gateway.css me).
-   Agar nahi hai to ye 2 lines add kar lo: */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* ===== BENTO ECOSYSTEM SECTION CSS =====
-   Isko apne dusre page ke <style> me paste karo */
-
-#bento-ecosystem {
-  background-color: #f8f9ff;
-  color: #0b1c30;
   font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-#bento-ecosystem ::selection {
-  background: #f37021;
-  color: #fff;
 }
 
-/* Fonts (page ke baaki fonts se conflict na ho isliye alag naam) */
-#bento-ecosystem .font-bento-display { font-family: 'Plus Jakarta Sans', sans-serif; }
-#bento-ecosystem .font-bento-mono    { font-family: 'JetBrains Mono', monospace; }
-
-.glow-orange { box-shadow: 0 0 35px -5px rgba(243, 112, 33, 0.25); }
-.glow-cyan   { box-shadow: 0 0 35px -5px rgba(58, 158, 226, 0.2); }
-
-.custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: #d3e4fe; border-radius: 4px; }
-
-.circuit-dot-grid {
-  background-image: radial-gradient(rgba(160, 65, 0, 0.12) 1px, transparent 1px);
-  background-size: 24px 24px;
+.sk-stage {
+  --px: calc(100cqw / 2048);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2048 / 768;
+  overflow: hidden;
+  color: #1c1c1c;
+  background: url('footer-bg.webp') center / 100% 100% no-repeat;
 }
 
-/* Material Symbols icon base (font link ke saath kaam karta hai) */
-#bento-ecosystem .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
+/* ---------- Center content div ---------- */
+.sk-card {
+  position: absolute;
+  left: calc(var(--px) * 155);
+  top: calc(var(--px) * 155);
+  width: calc(var(--px) * 1805);
+  height: calc(var(--px) * 355);
+  display: grid;
+  grid-template-columns:
+    calc(var(--px) * 482)    /* brand */
+    calc(var(--px) * 240)    /* platform */
+    calc(var(--px) * 271)    /* labs */
+    calc(var(--px) * 194)    /* resources */
+    calc(var(--px) * 173)    /* company */
+    calc(var(--px) * 445);   /* stay updated */
+}
+
+/* ---------- Brand ---------- */
+.sk-brand { padding-right: calc(var(--px) * 40); }
+
+.sk-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--px) * 14);
+  height: calc(var(--px) * 76);
+  margin-top: calc(var(--px) * 3);
+}
+.sk-logo svg { flex-shrink: 0; width: calc(var(--px) * 76); height: calc(var(--px) * 76); }
+.sk-logo-title {
+  font-size: calc(var(--px) * 48);
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+}
+.sk-logo-title span { font-weight: 400; }
+.sk-logo-sub {
+  margin-top: calc(var(--px) * 4);
+  font-size: calc(var(--px) * 23);
+  font-weight: 500;
+  line-height: 1;
+  color: #4b5563;
 }
 
-/* Switcher tile transitions */
-#bento-ecosystem .bento-tile { transition: all .3s ease; }
+.sk-desc {
+  width: calc(var(--px) * 450);
+  margin: calc(var(--px) * 30) 0 0;
+  font-size: calc(var(--px) * 21);
+  line-height: calc(var(--px) * 28.5);
+  color: #4a4a4a;
+}
+.sk-desc b { font-weight: 600; color: #1a1a1a; }
 
+.sk-features {
+  display: flex;
+  margin: calc(var(--px) * 30) 0 0 calc(var(--px) * -16);
+}
+.sk-feature {
+  padding: 0 calc(var(--px) * 15);
+  border-right: calc(var(--px) * 1) solid rgba(0, 0, 0, 0.18);
+  text-align: center;
+  font-size: calc(var(--px) * 15.5);
+  line-height: 1.28;
+  color: #333;
+}
+.sk-feature:last-child { border-right: 0; }
+.sk-feature svg {
+  display: block;
+  width: calc(var(--px) * 44);
+  height: calc(var(--px) * 44);
+  margin: 0 auto calc(var(--px) * 9);
+  color: #f26a1b;
+}
+
+/* ---------- Link columns ---------- */
+.sk-col { padding-top: calc(var(--px) * 24); }
+.sk-col--first {
+  padding-left: calc(var(--px) * 44);
+  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
+}
+.sk-col h4 {
+  margin: 0;
+  font-size: calc(var(--px) * 24);
+  font-weight: 800;
+  line-height: calc(var(--px) * 30);
+  letter-spacing: -0.01em;
+  color: #111;
+}
+.sk-col h4::after {
+  content: '';
+  display: block;
+  width: calc(var(--px) * 50);
+  height: calc(var(--px) * 3);
+  margin-top: calc(var(--px) * 7);
+  border-radius: 99px;
+  background: #f26a1b;
+}
+.sk-col ul { margin: calc(var(--px) * 21) 0 0; padding: 0; list-style: none; }
+.sk-col li { display: flex; align-items: center; height: calc(var(--px) * 42.4); }
+.sk-col a {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--px) * 14);
+  font-size: calc(var(--px) * 18.5);
+  color: #2a2a2a;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s;
+}
+.sk-col a:hover { color: #f26a1b; }
+.sk-col a svg { flex-shrink: 0; width: calc(var(--px) * 15); height: calc(var(--px) * 15); color: #f26a1b; }
+
+/* ---------- Stay updated ---------- */
+.sk-updates {
+  padding: calc(var(--px) * 22) 0 0 calc(var(--px) * 48);
+  border-left: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.28);
+}
+.sk-updates h3 {
+  margin: 0;
+  font-size: calc(var(--px) * 40);
+  font-weight: 800;
+  line-height: calc(var(--px) * 48);
+  letter-spacing: -0.02em;
+  color: #111;
+}
+.sk-updates h3 span { color: #f26a1b; }
+.sk-updates p {
+  width: calc(var(--px) * 360);
+  margin: calc(var(--px) * 10) 0 0;
+  font-size: calc(var(--px) * 20.5);
+  line-height: calc(var(--px) * 28);
+  color: #555;
+}
+
+.sk-form { display: flex; width: calc(var(--px) * 391); margin-top: calc(var(--px) * 29); }
+.sk-form input {
+  flex: 1;
+  min-width: 0;
+  height: calc(var(--px) * 48);
+  padding: 0 calc(var(--px) * 14);
+  border: calc(var(--px) * 1) solid #d9d4cc;
+  border-right: 0;
+  border-radius: calc(var(--px) * 8) 0 0 calc(var(--px) * 8);
+  background: rgba(255, 255, 255, 0.85);
+  font: 400 calc(var(--px) * 18.5) 'Inter', sans-serif;
+  color: #333;
+  outline: none;
+}
+.sk-form input::placeholder { color: #8a8a8a; }
+.sk-form input:focus { border-color: #f26a1b; }
+.sk-form button {
+  height: calc(var(--px) * 48);
+  padding: 0 calc(var(--px) * 24);
+  border: 0;
+  border-radius: 0 calc(var(--px) * 8) calc(var(--px) * 8) 0;
+  background: #f26a1b;
+  font: 600 calc(var(--px) * 19) 'Inter', sans-serif;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s;
+}
+.sk-form button:hover { background: #d95a10; }
+
+.sk-social { display: flex; align-items: center; gap: calc(var(--px) * 36); margin: calc(var(--px) * 40) 0 0 calc(var(--px) * 1); }
+.sk-social a { display: block; color: #111; transition: color .2s; }
+.sk-social a:hover { color: #f26a1b; }
+.sk-social svg { display: block; width: calc(var(--px) * 41); height: calc(var(--px) * 41); }
+.sk-join { margin-top: calc(var(--px) * 8); font-size: calc(var(--px) * 20.5); color: #222; }
+
+/* ---------- Bottom bar ---------- */
+.sk-bottom {
+  position: absolute;
+  left: calc(var(--px) * 418);
+  top: calc(var(--px) * 580);
+  width: calc(var(--px) * 1312);
+  display: flex;
+  justify-content: space-between;
+  padding-top: calc(var(--px) * 29);
+  border-top: calc(var(--px) * 1.5) solid rgba(0, 0, 0, 0.55);
+  font-size: calc(var(--px) * 15.5);
+  color: #333;
+}
+.sk-bottom b { font-weight: 700; color: #111; }
+.sk-legal { display: flex; align-items: center; margin-right: calc(var(--px) * 112); }
+.sk-legal a { color: #222; text-decoration: none; }
+.sk-legal a:hover { color: #f26a1b; }
+.sk-legal i { width: calc(var(--px) * 1.5); height: calc(var(--px) * 15); margin: 0 calc(var(--px) * 16); background: #222; }
+
+/* ---------- Handwritten notes ---------- */
+.sk-note-left,
+.sk-note-right {
+  position: absolute;
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.sk-note-left span,
+.sk-note-right span { display: block; white-space: nowrap; }
+
+.sk-note-left {
+  left: calc(var(--px) * 165);
+  top: calc(var(--px) * 566);
+  font-size: calc(var(--px) * 36);
+  line-height: 1;
+  transform: rotate(-13deg);
+  transform-origin: left top;
+}
+.sk-note-left span:nth-child(2) { padding-left: calc(var(--px) * 12); }
+.sk-note-left span:nth-child(3) { padding-left: calc(var(--px) * 22); }
+.sk-note-left span:nth-child(4) { padding-left: calc(var(--px) * 30); }
+
+.sk-arrow {
+  position: absolute;
+  left: calc(var(--px) * 285);
+  top: calc(var(--px) * 578);
+  width: calc(var(--px) * 90);
+  height: calc(var(--px) * 76);
+  color: #1a1a1a;
+}
+
+.sk-note-right {
+  left: calc(var(--px) * 1840);
+  top: calc(var(--px) * 640);
+  font-size: calc(var(--px) * 34);
+  line-height: 1.05;
+  transform: rotate(-23deg);
+  transform-origin: left bottom;
+}
+.sk-note-right span:nth-child(2) { padding-left: calc(var(--px) * 10); }
+.sk-note-right span:nth-child(3) { padding-left: calc(var(--px) * 20); }
+.sk-note-right::after {
+  content: '';
+  display: block;
+  width: calc(var(--px) * 175);
+  height: calc(var(--px) * 5);
+  margin: calc(var(--px) * 6) 0 0 calc(var(--px) * 8);
+  border-radius: 99px;
+  background: #f26a1b;
+  transform: rotate(-2deg);
+}
+
+/* ---------- Footer: tablet + mobile (stacked) ---------- */
+@container (max-width: 1279px) {
+  .sk-stage {
+    --px: 1px;
+    aspect-ratio: auto;
+    padding: 48px 24px 28px;
+    background-size: cover;
+  }
+  .sk-card {
+    position: static;
+    width: auto;
+    max-width: 1100px;
+    height: auto;
+    margin: 0 auto;
+    padding: 32px 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px 24px;
+    border-radius: 24px;
+    background: rgba(246, 241, 233, 0.92);
+  }
+  .sk-brand { grid-column: 1 / -1; padding: 0; }
+  .sk-desc  { width: auto; max-width: 620px; }
+  .sk-features { flex-wrap: wrap; margin-left: 0; row-gap: 18px; }
+  .sk-feature:first-child { padding-left: 0; }
+
+  .sk-col,
+  .sk-col--first { padding: 0; border-left: 0; }
+  .sk-col li { height: auto; min-height: 36px; }
+  .sk-col a  { white-space: normal; }
+
+  .sk-updates {
+    grid-column: 1 / -1;
+    padding: 28px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .sk-updates p { width: auto; }
+  .sk-form { width: 100%; max-width: 440px; }
+
+  .sk-bottom {
+    position: static;
+    width: auto;
+    max-width: 1100px;
+    margin: 22px auto 0;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    border-top: 0;
+    border-radius: 14px;
+    background: rgba(246, 241, 233, 0.92);
+  }
+  .sk-legal { margin-right: 0; flex-wrap: wrap; row-gap: 6px; }
+
+  .sk-note-left,
+  .sk-note-right,
+  .sk-arrow { display: none; }
+}
+
+@container (max-width: 799px) {
+  .sk-stage { padding: 32px 14px 22px; }
+  .sk-card  { padding: 26px 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sk-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 0; }
+  .sk-feature  { padding: 0 10px; border-right: 0; }
+  .sk-feature:first-child { padding-left: 10px; }
+}
+
+@container (max-width: 479px) {
+  .sk-stage { --px: .78px; }
+  .sk-form input { font-size: 16px; }   /* iOS auto-zoom rokne ke liye */
+}
+
+
+/* ==========================================================================
+   10. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-subtle,
+  .animate-glow-line,
+  .animated-sine,
+  .navbar::after { animation: none !important; }
+}
     </style>
 </head>
 <body class="bg-gray-50">
 
-
-
-
-
-
-
+<!-- hero section -->
 <section id="navbar" class="w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
   <div class="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
 
@@ -585,7 +998,6 @@ body { font-family: 'Inter', sans-serif; }
     </div>
   </div>
 
-  <!-- Mobile menu panel -->
   <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md">
     <nav class="max-w-[1440px] mx-auto px-6 py-3 flex flex-col text-[15px] font-medium text-slate-700">
       <a class="py-2.5 text-[#F35A10] font-semibold" href="#">Home</a>
@@ -598,9 +1010,8 @@ body { font-family: 'Inter', sans-serif; }
     </nav>
   </div>
 </section>
-<!-- END: NavSection -->
 
-<!-- BEGIN: HeroSection -->
+<!-- Where Engineering Meets -->
 <section id="hero" class="max-w-[1440px] mx-auto px-6 pt-10 pb-16">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
 
@@ -778,9 +1189,8 @@ body { font-family: 'Inter', sans-serif; }
     </div>
   </div>
 </section>
-<!-- END: HeroSection -->
 
-<!-- BEGIN: FeatureCardsRow -->
+<!-- INTERACTIVE ENGINE -->
 <section class="max-w-[1440px] mx-auto px-6 mb-16" id="architecture">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -840,9 +1250,8 @@ body { font-family: 'Inter', sans-serif; }
     </div>
   </div>
 </section>
-<!-- END: FeatureCardsRow -->
 
-<!-- BEGIN: EcosystemFlowSection -->
+<!-- THE SARKIT EDTECH ECOSYSTEM -->
 <section class="max-w-[1440px] mx-auto px-6 pb-20">
   <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
 
@@ -922,14 +1331,8 @@ body { font-family: 'Inter', sans-serif; }
     </div>
   </div>
 </section>
-<!-- END: EcosystemFlowSection -->
 
-
-
-
-
-
-<!-- BEGIN: EcosystemJourneySection -->
+<!-- The SARKIT Ecosystem -->
 <section id="ecosystem-journey" class="blueprint-grid relative overflow-x-hidden text-[#0F1115] selection:bg-[#F37021]/20 selection:text-[#F37021]" style="font-family:'Plus Jakarta Sans','Inter',sans-serif;">
 
   <svg class="watermark-s" fill="currentColor" viewBox="0 0 100 100">
@@ -1352,10 +1755,8 @@ body { font-family: 'Inter', sans-serif; }
   </section>
 
 </section>
-<!-- END: EcosystemJourneySection -->
 
-
-<!-- BEGIN: SarkitInfographicSection -->
+<!-- WHAT IS SARKIT? -->
 <section id="sarkit-infographic" class="bg-tech-grid text-slate-800 antialiased relative overflow-x-hidden p-4 sm:p-6 lg:p-10 selection:bg-[#F95A00] selection:text-white" style="font-family:'Inter',sans-serif;">
   <div class="max-w-[1920px] mx-auto w-full relative">
 
@@ -1762,16 +2163,8 @@ body { font-family: 'Inter', sans-serif; }
 
   </div>
 </section>
-<!-- END: SarkitInfographicSection -->
 
-<!-- ===== AUDIENCE GATEWAY SECTION =====
-     Page <head> me ye 2 cheezein honi chahiye (agar pehle se nahi hain):
-     1) <script src="https://cdn.tailwindcss.com"></script>
-     2) Caveat font (neeche link diya hai, chaho to head me daal do)
-     CSS alag file (audience-gateway.css) se <style> me paste karo.
--->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
-
+<!-- AUDIENCE GATEWAY -->
 <section id="audience-gateway" class="tech-grid-pattern text-slate-800 antialiased py-5 sm:py-7 px-3 sm:px-6 lg:px-8 selection:bg-[#f37021] selection:text-white">
   <div class="max-w-[1880px] mx-auto w-full flex flex-col gap-5 sm:gap-6">
 
@@ -2104,10 +2497,10 @@ body { font-family: 'Inter', sans-serif; }
   </div>
 </section>
 
-<!-- Lucide Icons (agar page me pehle se hai to ye line hata do) -->
-<script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- AUDIENCE GATEWAY SCRIPT -->
+
+
+
 <script>
 (function () {
   function initAudienceGateway() {
@@ -2246,6 +2639,7 @@ body { font-family: 'Inter', sans-serif; }
   }
 })();
 </script>
+<!-- BENTO ARCHITECTURE v3.0 -->
 <section id="bento-ecosystem" class="circuit-dot-grid">
 <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
 
@@ -2673,7 +3067,6 @@ body { font-family: 'Inter', sans-serif; }
 </div>
 </section>
 
-<!-- BENTO ECOSYSTEM SCRIPT -->
 <script>
 (function () {
   function initBento() {
@@ -2761,7 +3154,7 @@ body { font-family: 'Inter', sans-serif; }
 })();
 </script>
 
-
+<!-- Virtual Labs Simulation -->
 <section id="lab-hero" class="w-full min-h-screen xl:h-screen flex flex-col justify-between p-4 sm:p-6 lg:px-8 lg:py-5 lab-hero-bg max-w-[1920px] mx-auto box-border overflow-hidden overflow-x-hidden">
 
   <!-- TOP ROW -->
@@ -3151,6 +3544,1306 @@ body { font-family: 'Inter', sans-serif; }
 </section>
 
 
+<section class="relative w-full min-h-screen blueprint-grid overflow-hidden py-6 px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col justify-between">
+
+  <!-- Ambient glow -->
+  <div class="pointer-events-none absolute -top-10 right-0 w-[55vw] h-[520px] bg-gradient-to-l from-amber-500/15 via-orange-500/10 to-transparent blur-3xl -z-10"></div>
+  <div class="pointer-events-none absolute top-1/3 left-1/4 w-80 h-80 bg-orange-400/5 rounded-full blur-3xl -z-10"></div>
+
+  <!-- ================= HERO ================= -->
+  <div class="max-w-[1920px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1 pb-4">
+
+    <!-- Left: heading + badges -->
+    <div class="lg:col-span-5 flex flex-col justify-center z-10 pr-0 lg:pr-2">
+      <div class="flex items-center gap-2.5 mb-2.5">
+        <span class="h-[2px] w-7 bg-[#f37021] inline-block"></span>
+        <span class="text-[13px] font-black tracking-[0.25em] text-[#f37021] uppercase">SARKIT LAB</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl xl:text-[54px] font-black tracking-tight leading-[1.08] text-slate-900 mb-3">
+        Explore Our <span class="text-[#f37021]">Laboratories</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl mb-6">
+        A wide range of virtual laboratories for hands-on experimentation, simulation and engineering learning.
+      </p>
+
+      <div class="grid grid-cols-5 gap-2 sm:gap-3 max-w-[520px]">
+        <div class="flex flex-col items-center text-center group cursor-default">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-[#f37021] mb-2 border border-orange-200/70 group-hover:scale-105 transition-transform duration-200 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect height="14" rx="2" width="14" x="5" y="5"></rect><rect height="6" width="6" x="9" y="9"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Realistic<br/>Simulations</span>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-default">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-[#f37021] mb-2 border border-orange-200/70 group-hover:scale-105 transition-transform duration-200 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Hands-on<br/>Experiments</span>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-default">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-[#f37021] mb-2 border border-orange-200/70 group-hover:scale-105 transition-transform duration-200 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Interactive<br/>Analysis</span>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-default">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-[#f37021] mb-2 border border-orange-200/70 group-hover:scale-105 transition-transform duration-200 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><circle cx="12" cy="10" r="2"></circle></svg>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Curriculum<br/>Aligned</span>
+        </div>
+        <div class="flex flex-col items-center text-center group cursor-default">
+          <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-[#f37021] mb-2 border border-orange-200/70 group-hover:scale-105 transition-transform duration-200 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-700 leading-tight">Learn<br/>Anywhere</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: monitor mockup -->
+    <div class="lg:col-span-7 flex items-center justify-end relative">
+      <div class="w-full max-w-[890px] bg-[#111622] rounded-2xl p-2 sm:p-2.5 shadow-[0_20px_50px_-10px_rgba(15,23,42,0.55)] border border-slate-700/80 ring-1 ring-white/10 relative">
+        <div class="bg-[#0b0e14] rounded-xl overflow-hidden border border-slate-800 text-slate-200">
+
+          <!-- Monitor navbar -->
+          <div class="h-10 bg-[#0d121c] border-b border-slate-800 px-3 sm:px-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 rounded bg-[#f37021] flex items-center justify-center text-[10px] font-black text-white">S</div>
+              <span class="font-extrabold tracking-wider text-xs text-white uppercase">SARKIT <span class="text-[#f37021]">LAB</span></span>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 bg-[#161d2a] px-3 py-1 rounded-md w-72 text-slate-400 border border-slate-700/60">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              <span class="text-[11px] text-slate-400 truncate">Search experiments, components, labs...</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="text-slate-400 hover:text-white" title="Theme">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+              </button>
+              <button class="text-slate-400 hover:text-white" title="Notifications">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              </button>
+              <div class="flex items-center gap-1.5 pl-2 border-l border-slate-700">
+                <div class="w-5 h-5 rounded-full bg-slate-700 text-amber-300 font-bold text-[9px] flex items-center justify-center">AS</div>
+                <div class="leading-none text-left hidden sm:block">
+                  <span class="block text-[10px] font-bold text-white">Aman</span>
+                  <span class="block text-[8px] text-slate-400">Student</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitor body -->
+          <div class="grid grid-cols-12 min-h-[290px]">
+
+            <!-- Sidebar -->
+            <div class="col-span-3 bg-[#0d1118] border-r border-slate-800 p-2 space-y-1 text-[11px] hidden md:block select-none">
+              <div class="px-2 py-1 text-slate-400 flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>Dashboard</span></div>
+              <div class="px-2 py-1.5 bg-[#f37021] text-white font-semibold rounded flex items-center justify-between shadow-sm cursor-pointer">
+                <span class="flex items-center gap-1.5 truncate">
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect height="16" rx="2" width="16" x="4" y="4"></rect></svg>
+                  Electronics Lab
+                </span>
+                <span class="text-[10px]">›</span>
+              </div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>Robotics Lab</span><span class="text-[10px]">›</span></div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>Embedded Systems</span><span class="text-[10px]">›</span></div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>IoT &amp; Smart Systems</span><span class="text-[10px]">›</span></div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>Control Systems Lab</span><span class="text-[10px]">›</span></div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>Communication Lab</span></div>
+          <div class="px-2 py-1 text-slate-400 hover:text-white flex items-center justify-between rounded hover:bg-slate-800/40 cursor-pointer"><span>STEM Labs</span></div>
+            </div>
+
+            <!-- Circuit canvas -->
+            <div class="col-span-12 md:col-span-5 bg-[#080b10] p-2.5 flex flex-col justify-between border-r border-slate-800 relative">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
+                <span class="font-semibold text-slate-200 text-xs">Circuit Simulation</span>
+                <button class="bg-[#f37021] hover:bg-orange-600 text-white font-bold px-2.5 py-0.5 rounded text-[10px] tracking-wide shadow-sm flex items-center gap-1 transition-colors">
+                  <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  Run Simulation
+                </button>
+              </div>
+              <div class="relative h-44 my-1.5 flex items-center justify-center bg-[#0d121c] rounded border border-slate-800/80 overflow-hidden">
+                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#38bdf8 1px, transparent 1px); background-size: 14px 14px;"></div>
+                <svg class="w-full h-full max-h-36 px-2" fill="none" viewBox="0 0 340 160">
+                  <circle cx="40" cy="90" fill="#0d121c" r="14" stroke="#38bdf8" stroke-width="1.5"></circle>
+                  <path d="M34 90 Q40 82 40 90 T46 90" fill="none" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <text fill="#94a3b8" font-family="sans-serif" font-size="8" x="28" y="118">V1 Sine</text>
+                  <text fill="#94a3b8" font-family="sans-serif" font-size="8" x="32" y="128">1 kHz</text>
+                  <path d="M40 76 V50 H100" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <path d="M100 50 L104 44 L112 56 L120 44 L128 56 L136 44 L140 50" fill="none" stroke="#f37021" stroke-width="1.5"></path>
+                  <text fill="#e2e8f0" font-size="8" font-weight="bold" x="112" y="38">R1 10kΩ</text>
+                  <path d="M140 50 H160 V22 H240 V65" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <path d="M180 22 L184 16 L192 28 L200 16 L208 28 L216 16 L220 22" fill="none" stroke="#f59e0b" stroke-width="1.5"></path>
+                  <text fill="#cbd5e1" font-size="8" x="194" y="12">R2</text>
+                  <polygon fill="#142436" points="160,40 160,90 205,65" stroke="#38bdf8" stroke-width="1.5"></polygon>
+                  <text fill="#38bdf8" font-size="10" x="164" y="54">-</text>
+                  <text fill="#38bdf8" font-size="10" x="164" y="82">+</text>
+                  <text fill="#ffffff" font-size="8" font-weight="bold" x="174" y="68">U1 LM741</text>
+                  <path d="M160 80 H140 V105 H155" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <line stroke="#38bdf8" stroke-width="2" x1="155" x2="155" y1="100" y2="110"></line>
+                  <line stroke="#38bdf8" stroke-width="2" x1="160" x2="160" y1="100" y2="110"></line>
+                  <path d="M160 105 H175 V130" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <line stroke="#38bdf8" stroke-width="1.5" x1="168" x2="182" y1="130" y2="130"></line>
+                  <line stroke="#38bdf8" stroke-width="1.5" x1="171" x2="179" y1="133" y2="133"></line>
+                  <text fill="#94a3b8" font-size="7" x="180" y="108">C1 10µF</text>
+                  <path d="M205 65 H280" stroke="#38bdf8" stroke-width="1.5"></path>
+                  <circle cx="280" cy="65" fill="#38bdf8" r="3"></circle>
+                  <text fill="#38bdf8" font-size="8" font-weight="bold" x="270" y="58">Vout</text>
+                </svg>
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1">
+                <span>Status: <span class="text-emerald-400 font-medium">Ready</span></span>
+                <span>DC Bias: <span class="text-slate-300">0.00 V</span></span>
+              </div>
+            </div>
+
+            <!-- Waveform analysis -->
+            <div class="col-span-12 md:col-span-4 bg-[#0d121c] p-2.5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                  <span class="font-semibold text-slate-200 text-xs">Waveform Analysis</span>
+                  <span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded border border-slate-700">Time Domain ▾</span>
+                </div>
+                <div class="flex items-center gap-3 mt-1.5 text-[10px]">
+                  <span class="flex items-center gap-1 text-[#f37021]"><span class="w-2 h-2 rounded-full bg-[#f37021]"></span> Input (Vin)</span>
+                  <span class="flex items-center gap-1 text-cyan-400"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Output (Vout)</span>
+                </div>
+                <div class="relative h-28 my-1.5 bg-black/70 rounded border border-slate-800 overflow-hidden flex items-center">
+                  <div class="absolute inset-0" style="background-image: linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px); background-size: 20px 14px; opacity: 0.45;"></div>
+                  <svg class="w-full h-full relative z-10" preserveAspectRatio="none" viewBox="0 0 200 100">
+                    <line stroke="#334155" stroke-dasharray="2,2" x1="0" x2="200" y1="50" y2="50"></line>
+                    <path d="M0 50 Q25 20 50 50 T100 50 T150 50 T200 50" fill="none" stroke="#f37021" stroke-width="2"></path>
+                    <path class="animated-sine" d="M0 50 Q25 88 50 50 T100 50 T150 50 T200 50" fill="none" stroke="#38bdf8" stroke-width="2"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="grid grid-cols-4 gap-1 text-center bg-[#070a0f] p-1.5 rounded border border-slate-800 text-[9px]">
+                <div><span class="block text-slate-500">Frequency</span><span class="block font-semibold text-white">1.00 kHz</span></div>
+                <div><span class="block text-slate-500">Vpp (Vin)</span><span class="block font-semibold text-[#f37021]">2.00 V</span></div>
+                <div><span class="block text-slate-500">Vpp (Vout)</span><span class="block font-semibold text-cyan-400">3.50 V</span></div>
+                <div><span class="block text-slate-500">Gain</span><span class="block font-semibold text-emerald-400">1.75</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical words -->
+      <div class="hidden 2xl:flex flex-col justify-center items-start pl-6 select-none leading-loose">
+        <div class="text-[12px] font-black tracking-[0.28em] text-slate-500/80 space-y-2 uppercase">
+          <div>SIMULATE</div>
+          <div>EXPERIMENT</div>
+          <div>ANALYZE</div>
+          <div>LEARN</div>
+          <div>BUIL<span class="text-[#f37021]">D</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LABS SLIDER ================= -->
+  <div class="w-full mt-6 relative">
+    <div class="flex items-center justify-between mb-3 px-1">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#f37021] animate-pulse"></span>
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-700">EXPLORE INTERACTIVE ENGINEERING TRACKS</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button aria-label="Previous lab card" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-[#f37021] hover:text-[#f37021] flex items-center justify-center transition shadow-sm active:scale-95" id="slider-prev-btn">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </button>
+        <button aria-label="Next lab card" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-[#f37021] hover:text-[#f37021] flex items-center justify-center transition shadow-sm active:scale-95" id="slider-next-btn">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-3 pt-1 px-1 cursor-grab active:cursor-grabbing select-none" id="carousel-track">
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border-2 border-[#f37021] shadow-md shadow-orange-500/10 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="Electronics Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2IFd0Kxn_eTgEGOKzkGpHgWwnSLbTXrxWFOYwR84hXffUya898MLz6mlUbc4JgHQy5kllaS27RQxB1yFy0NWJ6V92hhPZn0ZRWry4UobSeduJ8gcAAitb9Yxtzty6pY-tuPs3u8o0nLzQ0r3dDQvBEyyKcLKFeadBaka8jsHHnwYtZo6fk-5-Q8r49txpiMXKXG5dRQlB9ccXzoWIF19wPUeFLkEM7lTT0arB5ws"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect height="14" rx="2" width="14" x="5" y="5"></rect><circle cx="12" cy="12" fill="currentColor" r="2.5"></circle></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">Electronics Lab</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Design, simulate and analyze analog and digital circuits.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Circuits</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Analog</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Digital</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Devices</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:border-[#f37021]/60 hover:shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="Robotics Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0N5oZdF4f2zsBWgoGYQXk5y8CJdRXifLtQsaqs5Nge5SCDrWt7jZxF7cmKO6mw-PyA6TPn_BtmaN_gkvCJY4E_L8fN3qXtzMvFB4pE3eF4rClRSM1DoN5UoRl3hZhPMP06uET9SX6l4wdeRNV2WG9FdG5qT3RvLMNYmI2Uwg-RM3o_A5kRHpAh4Oc2RVH5HYSICGJLslqsYQdC5M3MM0AQ10rNcJha_fmv9WzZOI"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">Robotics Lab</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Simulate and program robotic systems and automation.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Kinematics</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Control</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Navigation</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">AI</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:border-[#f37021]/60 hover:shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="Embedded Systems Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3nEYYhyVyUw1h9hlcxgbInYFbr3fWe8jbdICEnoEIpKY8m3dXKxZHVt04oUURxmUPn5PITVqTtoiFuMjkEe6-s-2OP1wJ6T7uIJcNOK4jNva737MkOIj6WEPIgHpoK7OrG_Vtd2Ex87QbhKgjMGkc0BhPVoWLMQysKaQxwdEBm6m8HnBrHDzq3gPo05tBNMAP-IRFYSCuN8RonrMCuuDgWZiMgRVveYaQUUAsCE"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">Embedded Systems Lab</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Work with microcontrollers, programming and interfacing.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">MCU</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Interfacing</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Sensors</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Firmware</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:border-[#f37021]/60 hover:shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="IoT &amp; Smart Systems Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB299_JwRi6hVqF01wS3KdwoyKmsQwfTepNcHR9wpt6UwJz-uevbHPDwWqN8jU687LgEiKM-GIl-UC9D7XLz1Xvb_Mbxwh8SvyH7HtQ6XJQK30EmUYeALg1Ukku9Jgb77JUs4YEE896djb1qaBaFW3m0riODmgkSk5EpSu2ZT9tSTci5GAQJ1L8s6Lginp-_Yvy58Fu_uti3uKQQQ1FnGVkYBQddrb6yUiU06qFJbg"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071a10 10 0 0114.142 0M1.393 9.322a15 15 0 0121.214 0"></path></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">IoT &amp; Smart Systems Lab</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Build and simulate connected and smart applications.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">IoT</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Sensors</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Networks</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Smart Systems</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:border-[#f37021]/60 hover:shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="Control Systems Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmztN2gKQPoixPw0_ux1YgBqo81oaHCtSnTKitTrc-i5YR3OAoB7VKAdKRfZ-NFocood5dwtpNnXSiwe50g4CPZkGGt0H2dTw28ibGURMIQCJdQDv4cfqulIygF0cinc9jQ_ysEX4Jn9uwEWNL-QsNhs51-JN5YryUFL5qQr0SnvnqttlqsqA9GvI3SDGq3b3npAjfkfiI-boQ5IlEJjL0siQK623nKVFVZg-bZM4"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">Control Systems Lab</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Model, analyze and design control systems.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Modeling</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">PID</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Stability</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Simulation</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="flex-none w-[305px] sm:w-[320px] bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:border-[#f37021]/60 hover:shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 group">
+        <div>
+          <div class="relative h-44 w-full overflow-hidden bg-slate-900">
+            <img alt="STEM Labs (Class 9–12)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgF2-huh5uFFvoU5q5PZGXsV-gvHDj6iItDxJVEZ1g30zi2xJ6gpghkgrwMKnwPRUT2O_kc9laP_Rf8E6wwA_sGe5e6holOiEYUAjDkTleD3PfV8nZk0AVrVnm90Ga2-LLZn8QgdqLKp0FX_h9-ywcmJXVRVvtLnRpiGDB_3VAwHw5iyzHs3UBbdezh9UCZOos_Q8_voLMxQxi3eYrU4JXILico06gQ-h9cXsUCFA"/>
+            <div class="absolute bottom-3 left-3 w-9 h-9 rounded-xl bg-[#f37021] text-white flex items-center justify-center shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+            </div>
+          </div>
+          <div class="p-4 sm:p-5">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#f37021] transition-colors">STEM Labs (Class 9–12)</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">Virtual labs for Physics, Chemistry and Mathematics.</p>
+            <div class="flex flex-wrap gap-1.5 mt-3.5">
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Physics</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Chemistry</span>
+          <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Mathematics</span>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-4 pt-1 flex items-center justify-between">
+          <span class="text-xs font-bold text-[#f37021]">Explore Lab</span>
+          <div class="w-7 h-7 rounded-full border border-[#f37021] text-[#f37021] flex items-center justify-center group-hover:bg-[#f37021] group-hover:text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+<section class="panoramic-canvas flex flex-col justify-between p-6 select-none" data-purpose="panoramic-board">
+
+  <!-- Ambient glows -->
+  <div class="laptop-glow-left"></div>
+  <div class="laptop-glow-right"></div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="relative w-full pt-1 flex flex-col items-center z-10">
+    <div class="absolute left-6 top-1 text-[10px] tracking-widest text-slate-400 font-semibold uppercase leading-tight text-left">
+      <span class="text-xs text-slate-300 font-light block mb-0.5">+</span>
+      <div>ONE</div><div>ECOSYSTEM</div><div>MANY</div><div>POSSIBILITIES</div>
+      <div class="w-7 h-[2px] bg-brand-500 mt-1"></div>
+    </div>
+    <div class="absolute right-6 top-1 text-[10px] tracking-widest text-slate-400 font-semibold uppercase leading-tight text-right">
+      <div class="w-7 h-[2px] bg-brand-500 mb-1 ml-auto"></div>
+      <div>LEARN</div><div>EXPERIMENT</div><div>BUILD</div><div>APPLY</div><div>RESEARCH</div><div>INNOVATE</div>
+    </div>
+    <div class="flex items-center gap-3 mb-1">
+      <span class="w-12 h-[1px] bg-slate-300"></span>
+      <span class="text-[11px] font-bold tracking-[0.25em] text-brand-600 uppercase">CHOOSE YOUR PATH</span>
+      <span class="w-12 h-[1px] bg-slate-300"></span>
+    </div>
+    <h1 class="text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 leading-none">
+      What are you trying to <span class="text-brand-600 drop-shadow-sm">accomplish?</span>
+    </h1>
+    <p class="text-slate-500 text-[13px] font-medium mt-2">Explore how SARKIT LAB and SARKITSHALA work together to support your goals.</p>
+  </header>
+
+  <!-- ================= MAIN STAGE ================= -->
+  <div class="relative w-full flex items-end justify-between px-4 mt-2 mb-2 z-10">
+
+    <!-- ===== LEFT: SARKIT LAB LAPTOP ===== -->
+    <div class="w-[620px] flex flex-col items-center">
+      <div class="w-full flex items-center gap-3 mb-2 px-6">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-500 to-orange-700 flex items-center justify-center shadow-md shadow-brand-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </div>
+        <div>
+          <div class="text-xl font-black tracking-tight text-slate-900 flex items-center gap-1.5 leading-tight">SARKIT <span class="font-bold text-slate-800">LAB</span></div>
+          <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Virtual Labs &amp; Simulation</div>
+        </div>
+      </div>
+
+      <div class="w-full">
+        <div class="laptop-chassis h-[335px] bg-slate-950 p-[2px] flex flex-col overflow-hidden">
+          <div class="laptop-camera-notch"></div>
+          <div class="w-full h-full bg-[#fdfdfd] rounded-[7px] flex flex-col overflow-hidden text-slate-800">
+
+            <!-- Topbar -->
+            <div class="h-6 bg-white border-b border-slate-200 px-2.5 flex items-center justify-between text-[9px]">
+              <div class="flex items-center gap-2 text-slate-700 font-semibold truncate">
+                <span class="text-brand-600 font-black">S</span>
+                <span>MQ-6 Sensor and Keypad-Bas...</span>
+                <div class="flex gap-1 text-slate-400 text-[8px] ml-1">
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"></path></svg>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[8px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded border border-slate-200">Unsaved</span>
+                <span class="text-[8px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200">Straighten Wires</span>
+                <span class="text-[8px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200">Share</span>
+                <span class="text-[8px] bg-brand-50 text-brand-600 font-bold px-1.5 py-0.5 rounded border border-brand-200">Code</span>
+                <span class="text-[8px] bg-brand-600 text-white font-bold px-2 py-0.5 rounded">Sim</span>
+              </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="flex-1 flex overflow-hidden">
+
+              <!-- Palette -->
+              <div class="w-24 bg-white border-r border-slate-200 p-1.5 flex flex-col text-[8px]">
+                <div class="font-bold text-slate-400 text-[7px] uppercase tracking-wider mb-1">Components</div>
+                <div class="bg-slate-100 rounded px-1.5 py-0.5 mb-1 text-[7px] text-slate-400">Search components...</div>
+                <div class="font-semibold text-slate-500 text-[7px] mt-1 mb-0.5 uppercase">Microcontroller</div>
+                <div class="grid grid-cols-2 gap-1 mb-1">
+                  <div class="bg-slate-50 border border-slate-200 rounded p-1 text-center"><div class="w-4 h-5 bg-teal-700 mx-auto rounded-sm mb-0.5"></div><span class="scale-[0.8] block leading-tight text-slate-600">Arduino</span></div>
+                  <div class="bg-slate-50 border border-slate-200 rounded p-1 text-center"><div class="w-4 h-5 bg-slate-800 mx-auto rounded-sm mb-0.5"></div><span class="scale-[0.8] block leading-tight text-slate-600">ESP32</span></div>
+                </div>
+                <div class="font-semibold text-slate-500 text-[7px] mt-1 mb-0.5 uppercase">Basic</div>
+                <div class="grid grid-cols-2 gap-1">
+                  <div class="bg-slate-50 border border-slate-200 rounded p-1 text-center"><div class="w-2.5 h-3 bg-red-500 mx-auto rounded-full mb-0.5"></div><span class="scale-[0.8] block leading-tight text-slate-600">LED</span></div>
+                  <div class="bg-slate-50 border border-slate-200 rounded p-1 text-center"><div class="w-3 h-1 bg-amber-200 border border-amber-500 mx-auto my-1"></div><span class="scale-[0.8] block leading-tight text-slate-600">Resistor</span></div>
+                </div>
+              </div>
+
+              <!-- Board canvas -->
+              <div class="flex-1 bg-[#f3f6f9] relative p-2 overflow-hidden flex items-center justify-center">
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <div class="w-32 h-44 bg-[#00878a] rounded border-2 border-[#006f71] shadow-md p-1.5 flex flex-col justify-between text-white text-[7px] font-mono relative">
+                    <div class="flex justify-between items-start">
+                      <span class="font-black text-[9px] tracking-tighter">ARDUINO <span class="font-light">UNO</span></span>
+                      <div class="w-5 h-6 bg-slate-300 rounded border border-slate-400"></div>
+                    </div>
+                    <div class="w-20 h-6 bg-slate-900 mx-auto rounded border border-slate-700 flex items-center justify-center text-[5px] text-slate-400">ATMEGA328P</div>
+                    <div class="flex justify-between items-end text-[6px]"><span>DIGITAL (PWM~)</span><span>POWER</span></div>
+                  </div>
+                  <div class="ml-4 w-24 h-36 bg-slate-900 rounded border-2 border-slate-700 p-1.5 shadow-md flex flex-col justify-between">
+                    <div class="text-[7px] text-slate-400 font-mono text-center">4x4 MATRIX KEYPAD</div>
+                    <div class="grid grid-cols-4 gap-1 text-[7px] font-bold text-center text-white"><div class="bg-slate-800 rounded py-0.5">1</div><div class="bg-slate-800 rounded py-0.5">2</div><div class="bg-slate-800 rounded py-0.5">3</div><div class="bg-brand-600 rounded py-0.5">A</div><div class="bg-slate-800 rounded py-0.5">4</div><div class="bg-slate-800 rounded py-0.5">5</div><div class="bg-slate-800 rounded py-0.5">6</div><div class="bg-brand-600 rounded py-0.5">B</div><div class="bg-slate-800 rounded py-0.5">7</div><div class="bg-slate-800 rounded py-0.5">8</div><div class="bg-slate-800 rounded py-0.5">9</div><div class="bg-brand-600 rounded py-0.5">C</div><div class="bg-red-600 rounded py-0.5">*</div><div class="bg-slate-800 rounded py-0.5">0</div><div class="bg-red-600 rounded py-0.5">#</div><div class="bg-brand-600 rounded py-0.5">D</div></div>
+                    <div class="h-2 bg-slate-800 border-t border-slate-700"></div>
+                  </div>
+                  <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 250 200">
+                    <path d="M 90 70 C 120 40, 140 40, 160 80" fill="none" stroke="#f97316" stroke-width="2"></path>
+                    <path d="M 85 85 C 110 65, 130 65, 160 95" fill="none" stroke="#10b981" stroke-width="1.8"></path>
+                    <path d="M 90 100 C 115 90, 130 90, 160 110" fill="none" stroke="#3b82f6" stroke-width="2"></path>
+                    <path d="M 95 120 C 115 110, 135 110, 160 125" fill="none" stroke="#ef4444" stroke-width="1.8"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Code editor + serial -->
+              <div class="w-36 bg-[#1e293b] text-slate-300 font-mono text-[7px] flex flex-col border-l border-slate-800">
+                <div class="bg-slate-900 px-2 py-1 flex items-center justify-between text-[7px] text-slate-400">
+                  <span>sketch.ino</span><span class="text-[6px] text-brand-400">Arduino UNO</span>
+                </div>
+                <div class="p-2 flex-1 overflow-hidden leading-tight font-mono text-[6.5px]">
+                  <div class="text-slate-500">#include &lt;Keypad.h&gt;</div>
+                  <div class="text-brand-400 mt-1">const byte ROWS = 4;</div>
+                  <div class="text-brand-400">const byte COLS = 4;</div>
+                  <div class="text-slate-300 mt-1">char keys[ROWS][COLS] = {</div>
+                  <div class="text-emerald-400 pl-1.5">{'1','2','3','A'},</div>
+                  <div class="text-emerald-400 pl-1.5">{'4','5','6','B'},</div>
+                  <div class="text-slate-400">};</div>
+                  <div class="text-blue-300 mt-1">void setup() {</div>
+                  <div class="text-slate-400 pl-1.5">Serial.begin(9600);</div>
+                  <div class="text-blue-300">}</div>
+                </div>
+                <div class="bg-slate-900/90 border-t border-slate-800 p-1.5 text-[6px]">
+                  <div class="text-brand-400 font-bold mb-0.5">Serial Monitor (9600 baud)</div>
+                  <div class="text-slate-400">&gt; MQ-6 LFO SECURITY SYSTEM</div>
+                  <div class="text-emerald-400">&gt; STATUS: ONLINE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+
+      <div class="flex items-center gap-2 mt-4">
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span>
+          Virtual Labs
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>
+          Simulation
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"></path></svg></span>
+          Experimentation
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></span>
+          Engineering
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CENTER: GOAL SELECTOR ===== -->
+    <div class="w-[520px] flex flex-col items-center z-20 mb-1">
+
+      <!-- Bridge -->
+      <div class="w-full flex items-center justify-between px-3 mb-2 relative">
+        <div class="bg-white/90 backdrop-blur border border-slate-200/80 rounded-full px-3 py-1 text-center shadow-sm">
+          <div class="text-[10px] font-bold text-slate-800 leading-tight">Experiment</div>
+          <div class="text-[8px] font-medium text-slate-500 leading-tight">Simulate • Build</div>
+        </div>
+        <div class="flex-1 mx-2 relative flex items-center justify-center">
+          <svg class="w-full h-8" fill="none" viewBox="0 0 100 30">
+            <path d="M5 20 Q 50 -5 95 15" fill="none" stroke="#f97316" stroke-dasharray="3 3" stroke-width="1.8"></path>
+            <circle cx="50" cy="7" fill="#ea580c" r="3"></circle>
+          </svg>
+        </div>
+        <div class="relative">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-500 flex items-center justify-center shadow-lg shadow-brand-500/30 transform hover:scale-105 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white font-black" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24"><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div class="absolute -inset-1.5 bg-brand-500/20 rounded-2xl filter blur-sm -z-10"></div>
+        </div>
+        <div class="flex-1 mx-2 relative flex items-center justify-center">
+          <svg class="w-full h-8" fill="none" viewBox="0 0 100 30">
+            <path d="M5 15 Q 50 -5 95 20" fill="none" stroke="#f97316" stroke-dasharray="3 3" stroke-width="1.8"></path>
+            <circle cx="50" cy="7" fill="#ea580c" r="3"></circle>
+          </svg>
+        </div>
+        <div class="bg-white/90 backdrop-blur border border-slate-200/80 rounded-full px-3 py-1 text-center shadow-sm">
+          <div class="text-[10px] font-bold text-slate-800 leading-tight">Learn</div>
+          <div class="text-[8px] font-medium text-slate-500 leading-tight">Understand • Grow</div>
+        </div>
+      </div>
+
+      <!-- Goal card -->
+      <div class="w-full bg-white rounded-2xl border border-slate-200/90 shadow-xl p-4.5 glow-orange-soft">
+        <div class="text-center mb-3">
+          <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Select your primary goal</h2>
+          <p class="text-[11px] text-slate-500 font-medium">We'll show you the best platform or combination for your needs.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2.5">
+        <div class="relative bg-brand-50/60 border-2 border-brand-500 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-brand-600 rounded-full flex items-center justify-center text-white shadow-sm">
+            <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-white border border-brand-200 flex items-center justify-center text-brand-600 mb-1.5 shadow-xs">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Learning</div>
+            <p class="text-[9px] text-slate-600 leading-snug mt-0.5">I want to learn concepts and build knowledge.</p>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 hover:border-brand-300 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-600 mb-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"></path></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Experimentation</div>
+            <p class="text-[9px] text-slate-500 leading-snug mt-0.5">I want to simulate and run experiments.</p>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 hover:border-brand-300 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-600 mb-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Build</div>
+            <p class="text-[9px] text-slate-500 leading-snug mt-0.5">I want to build projects and prototypes.</p>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 hover:border-brand-300 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-600 mb-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Engineering</div>
+            <p class="text-[9px] text-slate-500 leading-snug mt-0.5">I want to develop engineering skills.</p>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 hover:border-brand-300 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-600 mb-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path><path d="M11 8v6"></path><path d="M8 11h6"></path></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Research</div>
+            <p class="text-[9px] text-slate-500 leading-snug mt-0.5">I want to explore, research and innovate.</p>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 hover:border-brand-300 rounded-xl p-2.5 flex flex-col justify-between transition-all cursor-pointer">
+          <div>
+            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-600 mb-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
+            </div>
+            <div class="text-[11px] font-bold text-slate-900 leading-tight">Skill Development</div>
+            <p class="text-[9px] text-slate-500 leading-snug mt-0.5">I want hands-on skills and practical exposure.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: SARKITSHALA LAPTOP ===== -->
+    <div class="w-[620px] flex flex-col items-center">
+      <div class="w-full flex items-center justify-end gap-3 mb-2 px-6">
+        <div class="text-right">
+          <div class="text-xl font-black tracking-tight text-slate-900 flex items-center justify-end gap-1.5 leading-tight">SARKIT<span class="font-bold text-slate-800">SHALA</span></div>
+          <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Learning &amp; Knowledge</div>
+        </div>
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-500 to-orange-700 flex items-center justify-center shadow-md shadow-brand-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </div>
+      </div>
+
+      <div class="w-full">
+        <div class="laptop-chassis h-[335px] bg-slate-950 p-[2px] flex flex-col overflow-hidden">
+          <div class="laptop-camera-notch"></div>
+          <div class="w-full h-full bg-[#f8fafc] rounded-[7px] flex flex-col overflow-hidden text-slate-800">
+
+            <div class="h-6 bg-white border-b border-slate-200 px-3 flex items-center justify-between text-[8px]">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-brand-600 rounded flex items-center justify-center text-white font-black text-[9px]">S</div>
+                <span class="font-extrabold text-slate-800 tracking-tight">SARKITSHALA</span>
+              </div>
+              <div class="flex-1 max-w-[180px] mx-3">
+                <div class="bg-slate-100 rounded-md px-2 py-0.5 text-slate-400 text-[7px] flex items-center gap-1">
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                  Search for courses, topics, projects...
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                <div class="w-4 h-4 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-[7px]">AS</div>
+              </div>
+            </div>
+
+            <div class="flex-1 flex overflow-hidden">
+              <div class="w-24 bg-white border-r border-slate-200 py-1.5 px-1 flex flex-col gap-0.5 text-[7.5px] font-semibold text-slate-600">
+                <div class="bg-brand-600 text-white px-2 py-1 rounded flex items-center gap-1">
+                  <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                  Home
+                </div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Learning Paths</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Courses</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Projects</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Assessments</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Community</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Resources</div>
+            <div class="px-2 py-0.5 rounded hover:bg-slate-100 text-slate-500">Certificates</div>
+              </div>
+
+              <div class="flex-1 p-2 overflow-hidden flex flex-col justify-between">
+                <div>
+                  <div class="text-[8.5px] font-bold text-slate-800 mb-1">Continue Learning</div>
+                  <div class="bg-white border border-slate-200 rounded-lg p-2 flex items-center gap-2 shadow-xs">
+                    <div class="w-14 h-12 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-brand-400 font-mono text-[7px] p-1 text-center">OP-AMP CIRCUIT</div>
+                    <div class="flex-1">
+                      <div class="text-[9px] font-bold text-slate-900">Electronics Fundamentals</div>
+                      <div class="text-[7.5px] text-slate-500">Module 3 • Operational Amplifiers</div>
+                      <div class="w-full bg-slate-100 h-1 rounded-full mt-1.5 overflow-hidden"><div class="bg-brand-500 h-full w-[70%]"></div></div>
+                    </div>
+                    <div class="text-right">
+                      <span class="text-[7.5px] font-bold text-slate-400 block mb-1">70%</span>
+                      <button class="bg-brand-600 text-white text-[7.5px] font-bold px-2.5 py-0.5 rounded shadow-xs">Continue</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-1">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[8.5px] font-bold text-slate-800">Popular Learning Paths</span>
+                    <span class="text-[7.5px] font-bold text-brand-600">View All</span>
+                  </div>
+                  <div class="grid grid-cols-4 gap-1.5">
+              <div class="bg-white border border-slate-200 rounded p-1 text-center shadow-xs">
+                <div class="h-6 bg-slate-800 rounded mb-1 flex items-center justify-center text-[6px] text-white font-bold">Class 9-12</div>
+                <div class="text-[7px] font-bold text-slate-800 truncate">Class 9-12 (PCM)</div>
+                <div class="text-[6px] text-slate-400">Build concepts</div>
+              </div>
+              <div class="bg-white border border-slate-200 rounded p-1 text-center shadow-xs">
+                <div class="h-6 bg-blue-900 rounded mb-1 flex items-center justify-center text-[6px] text-white font-bold">Engineering</div>
+                <div class="text-[7px] font-bold text-slate-800 truncate">Engineering &amp; Tech</div>
+                <div class="text-[6px] text-slate-400">Applications</div>
+              </div>
+              <div class="bg-white border border-slate-200 rounded p-1 text-center shadow-xs">
+                <div class="h-6 bg-emerald-900 rounded mb-1 flex items-center justify-center text-[6px] text-white font-bold">Skills</div>
+                <div class="text-[7px] font-bold text-slate-800 truncate">Skill Dev</div>
+                <div class="text-[6px] text-slate-400">Hands-on</div>
+              </div>
+              <div class="bg-white border border-slate-200 rounded p-1 text-center shadow-xs">
+                <div class="h-6 bg-amber-900 rounded mb-1 flex items-center justify-center text-[6px] text-white font-bold">Research</div>
+                <div class="text-[7px] font-bold text-slate-800 truncate">Research &amp; Inno</div>
+                <div class="text-[6px] text-slate-400">Advanced</div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-28 bg-white border-l border-slate-200 p-1.5 flex flex-col justify-between text-[7px]">
+                <div>
+                  <div class="font-bold text-slate-800 text-[8px] mb-1">Recommended</div>
+                  <div class="space-y-1.5">
+            <div class="p-1 rounded bg-slate-50 border border-slate-100">
+              <div class="font-bold text-slate-800 truncate">Robotics &amp; Automation</div>
+              <div class="text-[6px] text-slate-400">Beginner • 12 Modules</div>
+            </div>
+            <div class="p-1 rounded bg-slate-50 border border-slate-100">
+              <div class="font-bold text-slate-800 truncate">IoT &amp; Smart Systems</div>
+              <div class="text-[6px] text-slate-400">Interm. • 14 Modules</div>
+            </div>
+            <div class="p-1 rounded bg-slate-50 border border-slate-100">
+              <div class="font-bold text-slate-800 truncate">Research &amp; Inno</div>
+              <div class="text-[6px] text-slate-400">Advanced • 10 Mod</div>
+            </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+
+      <div class="flex items-center gap-2 mt-4">
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg></span>
+          Learning
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></span>
+          Knowledge
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg></span>
+          Skills
+        </div>
+        <div class="flex items-center gap-1.5 bg-white border border-slate-200/90 px-3 py-1 rounded-full shadow-sm text-[11px] font-semibold text-slate-700">
+          <span class="text-brand-600"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></span>
+          Practical Education
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RECOMMENDED PATH STRIP ================= -->
+  <footer class="w-full bg-white rounded-2xl border border-slate-200/90 shadow-md p-3 px-5 flex items-center justify-between gap-4 z-20">
+    <div class="w-56 flex-shrink-0 pr-3 border-r border-slate-100">
+      <h3 class="text-xs font-extrabold text-slate-900 tracking-tight leading-snug">Recommended Path for You</h3>
+      <p class="text-[10px] text-slate-500 font-medium leading-tight mt-0.5">Based on your goal, here's how SARKIT can help:</p>
+    </div>
+    <div class="flex-1 grid grid-cols-5 gap-3">
+      <div class="flex items-start gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+        <div class="text-brand-600 mt-0.5 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg></div>
+        <div class="leading-tight">
+          <div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-900">Learning Only</span><span class="text-brand-600 text-[10px]">→</span></div>
+          <div class="text-[9.5px] text-slate-500 font-medium mt-0.5">Best with: <span class="font-bold text-slate-800">SARKITSHALA</span></div>
+          <div class="text-[8.5px] text-slate-400 mt-0.5 truncate">Concepts • Knowledge • Skills</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+        <div class="text-brand-600 mt-0.5 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"></path></svg></div>
+        <div class="leading-tight">
+          <div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-900">Experimentation Only</span><span class="text-brand-600 text-[10px]">→</span></div>
+          <div class="text-[9.5px] text-slate-500 font-medium mt-0.5">Best with: <span class="font-bold text-slate-800">SARKIT LAB</span></div>
+          <div class="text-[8.5px] text-slate-400 mt-0.5 truncate">Simulations • Labs • Experiments</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+        <div class="text-brand-600 mt-0.5 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+        <div class="leading-tight">
+          <div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-900">Learning + Exp.</span><span class="text-brand-600 text-[10px]">→</span></div>
+          <div class="text-[9.5px] text-slate-500 font-medium mt-0.5">Best with: <span class="font-bold text-slate-800">Both Platforms</span></div>
+          <div class="text-[8.5px] text-slate-400 mt-0.5 truncate">Concepts • Labs • Projects</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+        <div class="text-brand-600 mt-0.5 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+        <div class="leading-tight">
+          <div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-900">Engineering &amp; Projects</span><span class="text-brand-600 text-[10px]">→</span></div>
+          <div class="text-[9.5px] text-slate-500 font-medium mt-0.5">Best with: <span class="font-bold text-slate-800">Both Platforms</span></div>
+          <div class="text-[8.5px] text-slate-400 mt-0.5 truncate">Skills • Sim • Real Apps</div>
+        </div>
+      </div>
+      <div class="flex items-start gap-2 p-1.5 rounded-xl hover:bg-slate-50 transition-colors">
+        <div class="text-brand-600 mt-0.5 flex-shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path><path d="M11 8v6"></path><path d="M8 11h6"></path></svg></div>
+        <div class="leading-tight">
+          <div class="flex items-center justify-between"><span class="text-[11px] font-bold text-slate-900">Research &amp; Innovation</span><span class="text-brand-600 text-[10px]">→</span></div>
+          <div class="text-[9.5px] text-slate-500 font-medium mt-0.5">Best with: <span class="font-bold text-slate-800">Both Platforms</span></div>
+          <div class="text-[8.5px] text-slate-400 mt-0.5 truncate">Advanced • Exp • Innovation</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</section>
+
+
+
+
+
+<!-- ============================================================
+     SARKITSHALA - Landing (single section)
+     Requires: Tailwind CDN (+ config), Plus Jakarta Sans font,
+               sarkitshala.css, sarkitshala.js
+     ============================================================ -->
+<section class="bg-circuit-grid text-slate-800 font-sans antialiased relative selection:bg-brand-500 selection:text-white">
+
+  <!-- Ambient background effect -->
+  <div aria-hidden="true" class="absolute inset-0 pointer-events-none desk-glow overflow-hidden z-0"></div>
+
+  <div class="relative z-10 flex flex-col">
+    <main class="max-w-[1920px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col justify-between gap-3.5">
+
+      <!-- ================= HERO (3 columns) ================= -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 xl:gap-5 items-center">
+
+        <!-- LEFT: Brand & value proposition -->
+        <div class="lg:col-span-3.5 xl:col-span-4 flex flex-col justify-center pt-2 lg:pr-2">
+          <div class="flex items-center space-x-2.5 mb-2.5">
+            <div class="relative w-9 h-9 flex-shrink-0">
+              <svg class="w-full h-full drop-shadow-sm" fill="none" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8H34C36.2091 8 38 9.79086 38 12V18H18C15.7909 18 14 19.7909 14 22V22C14 24.2091 15.7909 26 18 26H32C35.3137 26 38 28.6863 38 32V32C38 35.3137 35.3137 38 32 38H10C7.79086 38 6 36.2091 6 34V28H26C28.2091 28 30 26.2091 30 24V24C30 21.7909 28.2091 20 26 20H12C8.68629 20 6 17.3137 6 14V14C6 10.6863 8.68629 8 12 8Z" fill="#F37021"></path>
+                <path d="M14 13L24 8H34L24 13H14Z" fill="#FB923C"></path>
+                <path d="M30 33L20 38H10L20 33H30Z" fill="#C2410C"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-xl font-black tracking-tight text-slate-900 leading-none">SARKIT<span class="text-slate-800 font-extrabold">SHALA</span></h1>
+              <p class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase mt-0.5">Learning &amp; Knowledge</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-1.5 text-[9.5px] font-bold tracking-widest text-slate-500 uppercase mb-2">
+            <span>LEARN</span><span class="text-brand-500 text-[10px] font-black">✕</span>
+            <span>PRACTICE</span><span class="text-brand-500 text-[10px] font-black">✕</span>
+            <span>BUILD</span><span class="text-brand-500 text-[10px] font-black">✕</span>
+            <span>GROW</span><span class="text-brand-500 text-[10px] font-black">✕</span>
+            <span>EXCEL</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl xl:text-[34px] font-extrabold text-slate-900 leading-[1.12] tracking-tight mb-2">
+            Structured Learning<br/>
+            for a <span class="text-brand-500">Smarter Tomorrow.</span>
+          </h2>
+
+          <p class="text-slate-600 text-xs xl:text-[13px] leading-snug mb-3.5 max-w-sm">
+            <strong class="font-bold text-slate-800">SARKITSHALA</strong> is a comprehensive learning platform offering concepts, practical knowledge, hands-on projects and skill development across science, engineering and emerging technologies.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <a class="inline-flex items-center justify-center px-4 py-2 rounded-full text-white bg-brand-500 hover:bg-brand-600 font-bold text-xs shadow-md shadow-brand-500/25 transition-all duration-200 hover:scale-[1.02]" href="#">
+              Launch SARKITSHALA
+              <svg class="ml-1.5 w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </a>
+            <a class="inline-flex items-center justify-center px-3.5 py-2 rounded-full text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 font-semibold text-xs shadow-sm transition-all duration-200" href="#">
+              <span class="text-brand-500 mr-1.5 text-[10px]">▶</span> Watch Overview
+            </a>
+          </div>
+
+          <div class="grid grid-cols-6 gap-1.5 pt-2 border-t border-slate-200/80 max-w-md">
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Concept Based Learning</span>
+          </div>
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Interactive Content</span>
+          </div>
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Hands-on Projects</span>
+          </div>
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Skill Development</span>
+          </div>
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Certification Pathways</span>
+          </div>
+          <div class="flex flex-col items-center text-center group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-500 mb-1 transition-transform group-hover:-translate-y-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+            <span class="text-[8.5px] leading-tight font-medium text-slate-700">Learning Community</span>
+          </div>
+          </div>
+        </div>
+
+        <!-- CENTER: Laptop workstation -->
+        <div class="lg:col-span-5.5 xl:col-span-5 relative flex flex-col items-center justify-center">
+          <div class="w-full relative laptop-base-shadow">
+            <div class="bg-[#18181b] rounded-t-xl p-1.5 pb-1 laptop-frame border border-slate-700/80">
+              <div class="w-1 h-1 bg-slate-600 rounded-full mx-auto mb-1"></div>
+
+              <!-- Laptop screen -->
+              <div class="bg-[#0f1115] rounded overflow-hidden text-slate-200 border border-slate-800 text-[10px]">
+
+                <!-- App header -->
+                <div class="bg-[#161922] px-2.5 py-1.5 border-b border-slate-800 flex items-center justify-between">
+                  <div class="flex items-center space-x-1.5"><span class="text-brand-500 font-extrabold text-[11px]">SARKITSHALA</span></div>
+                  <div class="relative w-1/2 max-w-[200px]">
+                    <svg class="w-3 h-3 text-slate-400 absolute left-2 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    <input class="w-full bg-[#0c0e12] border border-slate-700/60 rounded py-0.5 pl-6 pr-2 text-[9px] text-slate-300 placeholder-slate-500 focus:outline-none" placeholder="Search for courses, topics, projects..." readonly type="text"/>
+                  </div>
+                  <div class="flex items-center space-x-2 text-[9px]">
+                    <span class="cursor-pointer text-slate-400 hover:text-white">☼</span>
+                    <span class="cursor-pointer text-slate-400 hover:text-white">🔔</span>
+                    <div class="flex items-center space-x-1 pl-1 border-l border-slate-800">
+                      <div class="w-4 h-4 rounded-full bg-slate-700 text-[8px] font-bold flex items-center justify-center text-white">AS</div>
+                      <div class="leading-none text-left hidden sm:block">
+                        <div class="font-semibold text-slate-200 text-[8px]">Aman Raj</div>
+                        <div class="text-[7px] text-slate-400">Student ▾</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- App body -->
+                <div class="grid grid-cols-12">
+
+                  <!-- Sidebar -->
+                  <div class="col-span-2 bg-[#12141c] border-r border-slate-800/80 p-1 space-y-0.5 text-[8px] font-medium hidden md:block">
+              <div class="bg-brand-500 text-white rounded px-1.5 py-0.5 flex items-center space-x-1 font-semibold"><span>🏠</span> <span>Home</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>🧭</span> <span>Explore</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>🔀</span> <span>Paths ❯</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>📚</span> <span>Courses</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>💻</span> <span>Projects</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>📝</span> <span>Assessments</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>🎓</span> <span>Certificates</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>👥</span> <span>Community</span></div>
+              <div class="text-slate-400 hover:text-slate-200 px-1.5 py-0.5 flex items-center space-x-1"><span>📦</span> <span>Resources</span></div>
+                  </div>
+
+                  <!-- Video stage -->
+                  <div class="col-span-12 md:col-span-6 bg-[#0c0e12] p-1.5 flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between text-[7.5px] text-slate-400 mb-1 pb-0.5 border-b border-slate-800">
+                        <span class="truncate max-w-[140px]">Courses &gt; Electronics &gt; Analog Circuits &gt; OP Amp Basics</span>
+                        <div class="flex space-x-0.5 bg-slate-900 p-0.5 rounded text-[7px]">
+                          <span class="bg-slate-700 text-white px-1 rounded">Content</span>
+                          <span class="px-1 text-slate-400">Notebook</span>
+                          <span class="px-1 text-slate-400">Simulation</span>
+                          <span class="px-1 text-slate-400">Discuss</span>
+                        </div>
+                      </div>
+                      <div class="text-[10px] font-bold text-white mb-1">Operational Amplifier: Fundamentals</div>
+
+                      <div class="relative bg-gradient-to-br from-slate-950 via-slate-900 to-black rounded border border-slate-800 p-1.5 h-32 flex flex-col justify-between overflow-hidden shadow-inner">
+                        <div class="relative w-full h-full flex items-center justify-between">
+                          <div class="relative z-10 w-16 h-full flex flex-col justify-end items-center">
+                            <div class="w-11 h-11 rounded-full bg-slate-800/80 border border-orange-500/40 relative overflow-hidden flex items-center justify-center text-brand-500 text-base font-bold">👨🏫</div>
+                            <span class="text-[7px] text-center text-slate-400 mt-0.5 font-mono">Prof. S. Rao</span>
+                          </div>
+                          <div class="relative flex-1 flex flex-col items-center justify-center">
+                            <svg class="w-32 h-20 stroke-orange-400 fill-none" stroke-width="1.5" viewBox="0 0 160 90">
+                              <polygon class="fill-slate-900/60 stroke-orange-400" points="60,20 60,70 110,45" stroke-width="1.5"></polygon>
+                              <text fill="#fff" font-family="sans-serif" font-size="9" x="65" y="38">-</text>
+                              <text fill="#fff" font-family="sans-serif" font-size="9" x="65" y="58">+</text>
+                              <line x1="20" x2="40" y1="35" y2="35"></line>
+                              <rect fill="#1e293b" height="6" width="12" x="40" y="32"></rect>
+                              <text fill="#fb923c" font-size="7" x="41" y="28">Rin</text>
+                              <line x1="52" x2="60" y1="35" y2="35"></line>
+                              <text fill="#fb923c" font-size="8" x="10" y="37">Vin</text>
+                              <line x1="45" x2="60" y1="55" y2="55"></line>
+                              <line x1="45" x2="45" y1="55" y2="65"></line>
+                              <line x1="40" x2="50" y1="65" y2="65"></line>
+                              <line x1="56" x2="56" y1="35" y2="15"></line>
+                              <line x1="56" x2="75" y1="15" y2="15"></line>
+                              <rect fill="#1e293b" height="6" width="14" x="75" y="12"></rect>
+                              <text fill="#fb923c" font-size="7" x="77" y="9">Rf</text>
+                              <line x1="89" x2="115" y1="15" y2="15"></line>
+                              <line x1="115" x2="115" y1="15" y2="45"></line>
+                              <line x1="110" x2="140" y1="45" y2="45"></line>
+                              <text fill="#fb923c" font-size="8" x="142" y="47">Vout</text>
+                            </svg>
+                            <div class="text-[8px] font-mono text-brand-500 font-bold tracking-wider mt-[-4px]">Av = - (Rf / Rin)</div>
+                          </div>
+                        </div>
+                        <div class="mt-auto pt-0.5 flex items-center justify-between text-[7px] text-slate-300">
+                          <div class="flex items-center space-x-1">
+                            <span class="text-brand-500 font-bold cursor-pointer">▶</span>
+                            <span class="text-slate-400">🔊</span>
+                            <span class="font-mono text-[7px]">12:34 / 28:15</span>
+                          </div>
+                          <div class="flex items-center space-x-1.5">
+                            <span class="bg-slate-800 px-1 py-0.5 rounded text-[6.5px] text-slate-300">1.0x</span>
+                            <span class="text-slate-400 text-[7px]">CC</span>
+                            <span class="text-slate-400 text-[7px]">⛶</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-1.5 bg-[#12141c] p-1.5 rounded border border-slate-800">
+                      <div class="flex items-center justify-between mb-0.5">
+                        <span class="font-bold text-[8px] text-white">Lecture Notes</span>
+                        <a class="text-[7.5px] text-brand-500 font-medium hover:underline flex items-center space-x-0.5" href="#"><span>📥</span> <span>Download PDF</span></a>
+                      </div>
+                      <ul class="text-[7.5px] text-slate-400 space-y-0.5 list-disc list-inside leading-tight">
+                        <li>High open-loop gain &amp; differential input</li>
+                        <li>Negative feedback creates virtual ground</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Playlist -->
+                  <div class="col-span-12 md:col-span-4 bg-[#141720] border-l border-slate-800 p-1.5 space-y-1 text-[7.5px]">
+                    <div class="font-bold text-[9px] text-white mb-0.5 pb-0.5 border-b border-slate-800 flex items-center justify-between">
+                      <span>Module Modules</span>
+                      <span class="text-slate-500 text-[7px]">6 Lessons</span>
+                    </div>
+              <div class="bg-brand-500/10 border border-brand-500/30 rounded p-1 flex items-center justify-between text-brand-500">
+                <span class="font-semibold truncate max-w-[85px]">▶ 1. Intro to Op-Amp</span>
+                <span class="font-mono text-[7px]">12:15</span>
+              </div>
+              <div class="bg-slate-800/40 hover:bg-slate-800/80 rounded p-1 flex items-center justify-between text-slate-300">
+                <span class="truncate max-w-[85px]">2. Inverting Amp</span>
+                <span class="font-mono text-slate-500 text-[7px]">18:20</span>
+              </div>
+              <div class="bg-slate-800/40 hover:bg-slate-800/80 rounded p-1 flex items-center justify-between text-slate-300">
+                <span class="truncate max-w-[85px]">3. Non-Inverting Amp</span>
+                <span class="font-mono text-slate-500 text-[7px]">16:10</span>
+              </div>
+              <div class="bg-slate-800/40 hover:bg-slate-800/80 rounded p-1 flex items-center justify-between text-slate-300">
+                <span class="truncate max-w-[85px]">4. Applications</span>
+                <span class="font-mono text-slate-500 text-[7px]">14:05</span>
+              </div>
+              <div class="bg-slate-800/40 hover:bg-slate-800/80 rounded p-1 flex items-center justify-between text-slate-300">
+                <span class="truncate max-w-[85px]">5. Practice Problems</span>
+                <span class="font-mono text-slate-500 text-[7px]">20:30</span>
+              </div>
+              <div class="bg-slate-800/40 hover:bg-slate-800/80 rounded p-1 flex items-center justify-between text-slate-300">
+                <span class="truncate max-w-[85px]">6. Quiz &amp; Assessment</span>
+                <span class="font-mono text-slate-500 text-[7px]">10:00</span>
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Keyboard deck -->
+            <div class="h-2.5 bg-gradient-to-b from-slate-400 to-slate-600 rounded-b-lg border-t border-slate-300/40 shadow-lg relative flex justify-center">
+              <div class="w-16 h-0.5 bg-slate-700/60 rounded-b"></div>
+            </div>
+          </div>
+
+          <!-- Accessories -->
+          <div class="w-full flex items-center justify-between mt-2 px-1">
+            <div class="flex flex-col space-y-0.5 max-w-[140px]">
+              <div class="bg-amber-900/90 text-amber-100 text-[7px] font-black tracking-wider px-1.5 py-0.5 rounded shadow-sm border-l-2 border-amber-600">ELECTRONICS</div>
+              <div class="bg-slate-800 text-slate-200 text-[7px] font-black tracking-wider px-1.5 py-0.5 rounded shadow-sm border-l-2 border-orange-500">ROBOTICS &amp; AUTOMATION</div>
+              <div class="bg-stone-800 text-stone-200 text-[7px] font-black tracking-wider px-1.5 py-0.5 rounded shadow-sm border-l-2 border-stone-400">PROGRAMMING &amp; EMBEDDED</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-700 rounded-lg p-1.5 text-white shadow-md flex items-center space-x-1.5">
+              <div class="w-6 h-6 rounded bg-brand-500/20 border border-brand-500/50 flex items-center justify-center text-brand-500 text-xs">⚡</div>
+              <div>
+                <div class="text-[8px] font-bold">Interactive Simulation</div>
+                <div class="text-[7px] text-slate-400">Real-time Waveform Scope</div>
+              </div>
+            </div>
+            <div class="bg-slate-900 text-white border border-slate-800 rounded-full px-2.5 py-0.5 flex items-center space-x-1.5 shadow-md">
+              <span class="text-[8px] font-semibold text-slate-300">Keep Learning • Make Ideas Real</span>
+              <span class="w-3.5 h-3.5 rounded-full bg-brand-500 text-white flex items-center justify-center text-[8px] font-black">→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Progress cards -->
+        <div class="lg:col-span-3.5 xl:col-span-3 flex flex-col space-y-4 pt-1">
+
+          <div class="bg-white rounded-xl border border-slate-200/90 p-3 shadow-sm hover:shadow-md transition-shadow">
+            <h3 class="text-xs font-bold text-slate-900 mb-1">My Learning Journey</h3>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-2xl font-extrabold text-slate-900">63%</span>
+              <span class="text-[10px] text-brand-500 font-semibold bg-brand-50 px-1.5 py-0.5 rounded-full">On Track</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2.5 overflow-hidden"><div class="bg-brand-500 h-1.5 rounded-full" style="width: 63%"></div></div>
+            <div class="grid grid-cols-3 gap-1 pt-1.5 border-t border-slate-100 text-center">
+              <div class="flex flex-col items-center"><span class="text-xs font-extrabold text-slate-900">12</span><span class="text-[9px] font-semibold text-slate-500">Courses</span></div>
+              <div class="flex flex-col items-center border-x border-slate-100 px-1"><span class="text-xs font-extrabold text-slate-900">5</span><span class="text-[9px] font-semibold text-slate-500">Projects</span></div>
+              <div class="flex flex-col items-center"><span class="text-xs font-extrabold text-slate-900">3</span><span class="text-[9px] font-semibold text-slate-500">Certificates</span></div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200/90 p-3 shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-bold text-slate-900">Continue Learning</h3>
+              <a class="text-[10px] font-bold text-brand-500 hover:text-brand-600" href="#">View All</a>
+            </div>
+            <div class="space-y-2">
+          <div class="group cursor-pointer p-1.5 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all">
+            <div class="flex items-center space-x-2.5 mb-1">
+              <div class="w-9 h-8 rounded-lg bg-slate-900 overflow-hidden flex-shrink-0 relative flex items-center justify-center text-xs">🔌</div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-[11px] font-bold text-slate-900 truncate group-hover:text-brand-500 transition-colors">Electronics Fundamentals</h4>
+                <p class="text-[9px] text-slate-500 font-medium">Module 3 • In Progress</p>
+              </div>
+              <span class="text-[10px] font-bold text-slate-700">70%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1 overflow-hidden"><div class="bg-brand-500 h-1 rounded-full" style="width: 70%"></div></div>
+          </div>
+          <div class="group cursor-pointer p-1.5 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all">
+            <div class="flex items-center space-x-2.5 mb-1">
+              <div class="w-9 h-8 rounded-lg bg-slate-900 overflow-hidden flex-shrink-0 relative flex items-center justify-center text-xs">🤖</div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-[11px] font-bold text-slate-900 truncate group-hover:text-brand-500 transition-colors">Robotics and Automation</h4>
+                <p class="text-[9px] text-slate-500 font-medium">Module 2 • In Progress</p>
+              </div>
+              <span class="text-[10px] font-bold text-slate-700">45%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1 overflow-hidden"><div class="bg-brand-500 h-1 rounded-full" style="width: 45%"></div></div>
+          </div>
+          <div class="group cursor-pointer p-1.5 rounded-lg hover:bg-slate-50 border border-transparent hover:border-slate-200/80 transition-all">
+            <div class="flex items-center space-x-2.5 mb-1">
+              <div class="w-9 h-8 rounded-lg bg-slate-900 overflow-hidden flex-shrink-0 relative flex items-center justify-center text-xs">📡</div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-[11px] font-bold text-slate-900 truncate group-hover:text-brand-500 transition-colors">IoT and Smart Systems</h4>
+                <p class="text-[9px] text-slate-500 font-medium">Module 1 • In Progress</p>
+              </div>
+              <span class="text-[10px] font-bold text-slate-700">30%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1 overflow-hidden"><div class="bg-brand-500 h-1 rounded-full" style="width: 30%"></div></div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= EXPLORE LEARNING PATHS ================= -->
+      <div class="bg-white/90 backdrop-blur-sm rounded-xl border border-slate-200/90 p-2.5 shadow-sm">
+        <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+
+          <div class="flex lg:flex-col items-center lg:items-start justify-between flex-shrink-0 lg:pr-5 lg:border-r border-slate-200">
+            <div class="flex items-center space-x-3">
+              <div class="w-1.5 h-10 bg-brand-500 rounded-full"></div>
+              <h3 class="text-base font-extrabold text-slate-900 leading-tight">Explore<br/>Learning Paths</h3>
+            </div>
+            <div class="flex items-center space-x-2 mt-0 lg:mt-3">
+              <button aria-label="Previous learning path" class="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand-500 hover:border-brand-500 transition-all" id="carousel-prev">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+              </button>
+              <button aria-label="Next learning path" class="w-8 h-8 rounded-full bg-brand-500 text-white flex items-center justify-center hover:bg-brand-600 transition-all shadow-sm shadow-brand-500/30" id="carousel-next">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 flex overflow-x-auto no-scrollbar space-x-4 py-1 scroll-smooth" id="learning-track">
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-amber-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">🎓</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">Class 9–12 (PCM)</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">Build a strong foundation with interactive learning.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-orange-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">⚙️</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">Engineering &amp; Technology</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">Concepts to application with hands-on projects.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-blue-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">🤖</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">Robotics &amp; AI</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">Learn, simulate and build intelligent systems.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-rose-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">🎛️</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">Electronics &amp; Embedded Systems</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">From basics to advanced design and prototyping.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-emerald-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">🌐</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">IoT &amp; Smart Systems</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">Explore connected tech and real-world applications.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 w-56 bg-slate-50/80 hover:bg-white rounded-lg border border-slate-200/80 p-2 flex flex-col justify-between transition-all hover:shadow-sm group">
+          <div class="flex items-start space-x-2.5 mb-1">
+            <div class="w-11 h-11 rounded bg-yellow-100 flex-shrink-0 flex items-center justify-center text-xl group-hover:scale-105 transition-transform">💡</div>
+            <div>
+              <h4 class="text-[11px] font-bold text-slate-900 leading-tight">Research &amp; Innovation</h4>
+              <p class="text-[10px] text-slate-500 mt-0.5 leading-tight">Work on advanced topics and contribute to innovation.</p>
+            </div>
+          </div>
+          <div class="flex justify-end pt-0.5">
+            <div class="w-5 h-5 rounded-full border border-brand-500 text-brand-500 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition-colors">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+            </div>
+          </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</section>
 
 
 
@@ -3161,7 +4854,160 @@ body { font-family: 'Inter', sans-serif; }
 
 
 
-<!-- Navbar mobile menu script -->
+<!-- footer -->
+
+<footer class="sk-footer">
+  <!-- Stage: background image (footer-bg.jpg) -->
+  <div class="sk-stage">
+
+    <!-- ===== CENTER CONTENT DIV ===== -->
+    <div class="sk-card">
+
+      <!-- Brand -->
+      <div class="sk-brand">
+        <div class="sk-logo">
+          <svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="skg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9a2e"/><stop offset="1" stop-color="#e8500e"/></linearGradient></defs>
+          <path fill="url(#skg)" d="M24 4h46v20H38c-5 0-5 6 0 6h14c14 0 20 7 20 18s-7 24-22 24H4V52h42c5 0 5-6 0-6H28C14 46 4 38 4 26S12 4 24 4z"/>
+          <path fill="#1f1f1f" d="M20 22l30 12v10L20 32z" opacity=".85"/>
+        </svg>
+          <div>
+            <div class="sk-logo-title">SARKIT <span>LAB</span></div>
+            <div class="sk-logo-sub">Virtual Labs &amp; Simulation</div>
+          </div>
+        </div>
+        <p class="sk-desc"><b>SARKIT LAB</b> is a virtual laboratory platform for hands-on experimentation, simulation and engineering learning across electronics, robotics, IoT and multiple STEM domains.</p>
+        <div class="sk-features">
+        <div class="sk-feature"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="24" rx="3"/><path d="M18 40h12M24 32v8"/></svg>Interactive<br>Simulations</div>
+        <div class="sk-feature"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14h36M6 24h36M6 34h36"/><circle cx="17" cy="14" r="4" fill="#f5efe6"/><circle cx="31" cy="24" r="4" fill="#f5efe6"/><circle cx="21" cy="34" r="4" fill="#f5efe6"/></svg>Real-time<br>Experimentation</div>
+        <div class="sk-feature"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="28" width="7" height="14"/><rect x="18" y="20" width="7" height="22"/><rect x="30" y="12" width="7" height="30"/><path d="M6 42h36"/></svg>Hands-on<br>Learning</div>
+        <div class="sk-feature"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="5" width="28" height="38" rx="4"/><path d="M16 15h16M16 22h16M16 29h10"/><circle cx="31" cy="34" r="3.5" fill="#f5efe6"/></svg>Curriculum<br>Aligned</div>
+        </div>
+      </div>
+
+      <!-- Link columns -->
+    <div class="sk-col sk-col--first">
+      <h4>Platform</h4>
+      <ul>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Virtual Labs</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Simulations</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Experiments</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Components</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Curriculum</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Pricing</a></li>
+      </ul>
+    </div>
+    <div class="sk-col">
+      <h4>Labs</h4>
+      <ul>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Electronics Lab</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Robotics Lab</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>IoT &amp; Smart Systems Lab</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Embedded Systems Lab</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Control Systems Lab</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>STEM Labs (Class 9–12)</a></li>
+      </ul>
+    </div>
+    <div class="sk-col">
+      <h4>Resources</h4>
+      <ul>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Documentation</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Tutorials</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Sample Projects</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Learning Paths</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Help Center</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Community</a></li>
+      </ul>
+    </div>
+    <div class="sk-col">
+      <h4>Company</h4>
+      <ul>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>About Us</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Our Mission</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Careers</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Blog</a></li>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>Contact Us</a></li>
+      </ul>
+    </div>
+
+      <!-- Stay updated -->
+      <div class="sk-updates">
+        <h3>Stay <span>Updated</span></h3>
+        <p>Get the latest features, labs and learning resources.</p>
+        <div class="sk-form">
+          <input type="email" placeholder="Enter your email" aria-label="Email address"/>
+          <button type="button">Subscribe</button>
+        </div>
+        <div class="sk-social">
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 48 48"><rect width="44" height="44" x="2" y="2" rx="4" fill="currentColor"/><path fill="#f5efe6" d="M10 19h6v19h-6zM13 10a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zM20 19h5.7v2.6c1-1.8 3.2-3.1 6-3.1 5.5 0 6.8 3.5 6.8 8.3V38h-6v-9.6c0-2.3-.1-4.3-2.8-4.3s-3.1 2-3.1 4.2V38h-6z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 48 48"><rect width="46" height="33" x="1" y="7.5" rx="10" fill="currentColor"/><path fill="#f5efe6" d="M19 16l14 8-14 8z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4"><rect x="4" y="4" width="40" height="40" rx="12"/><circle cx="24" cy="24" r="9"/><circle cx="36" cy="12" r="2" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"><path d="M6 6h9l27 36h-9z" stroke-linejoin="round"/><path d="M41 6L26 21M7 42l15-15"/></svg></a>
+      <a href="#" aria-label="Discord"><svg viewBox="0 0 48 48"><path fill="currentColor" d="M39 10c-3-1.4-6-2.4-9.200-3l-1.300 2.700c-3-.5-6-.5-9 0L18.200 7c-3.200.6-6.200 1.600-9.200 3C3.500 18 2 26 3 34c3.800 2.800 7.500 4.500 11.200 5.600l2.400-3.900c-1.300-.5-2.500-1.100-3.700-1.900l.9-.7c7.200 3.300 15.300 3.300 22.500 0l.9.700c-1.200.8-2.400 1.400-3.700 1.900l2.400 3.900C41.500 38.500 45.200 36.800 45 34c1.100-9-1.100-17-6-24z"/><ellipse cx="17.500" cy="25" rx="3.600" ry="4.200" fill="#f5efe6"/><ellipse cx="30.500" cy="25" rx="3.600" ry="4.200" fill="#f5efe6"/></svg></a>
+        </div>
+        <div class="sk-join">Join our community</div>
+      </div>
+    </div>
+
+    <!-- ===== Bottom bar ===== -->
+    <div class="sk-bottom">
+      <div>© 2026 <b>SARKIT LAB</b>. All rights reserved.</div>
+      <div class="sk-legal">
+        <a href="#">Terms of Service</a><i></i><a href="#">Privacy Policy</a><i></i><a href="#">Refund Policy</a>
+      </div>
+    </div>
+
+    <!-- ===== Handwritten notes ===== -->
+    <div class="sk-note-left"><span>Simulate</span><span>Build</span><span>Learn</span><span>Repeat</span></div>
+    <svg class="sk-arrow" viewBox="0 0 95 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14C28 -2 70 2 82 30c4 9 5 22 5 34"/><path d="M4 14l12-9M4 14l11 10"/><path d="M87 64l-7-9M87 64l6-10"/>
+    </svg>
+    <div class="sk-note-right"><span>Different Labs.</span><span>Real Experiments.</span><span>One Platform.</span></div>
+
+  </div>
+</footer>
+
+
+
+<script>
+  /* ===== SARKITSHALA - Carousel logic ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('learning-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  if (!track) return;
+
+  const cardWidth = 272; // card (256px) + gap (16px)
+  let isPaused = false;
+
+  const scrollNext = () => {
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+    }
+  };
+
+  const scrollPrev = () => {
+    if (track.scrollLeft <= 10) {
+      track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+    }
+  };
+
+  if (nextBtn) nextBtn.addEventListener('click', scrollNext);
+  if (prevBtn) prevBtn.addEventListener('click', scrollPrev);
+
+  setInterval(() => { if (!isPaused) scrollNext(); }, 3600);
+
+  track.addEventListener('mouseenter', () => { isPaused = true; });
+  track.addEventListener('mouseleave', () => { isPaused = false; });
+  track.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
+  track.addEventListener('touchend', () => { isPaused = false; }, { passive: true });
+});
+</script>
+
 <script>
 (function () {
   var btn = document.getElementById('mobileMenuBtn');
@@ -3185,6 +5031,62 @@ body { font-family: 'Inter', sans-serif; }
   window.addEventListener('resize', function () { if (window.innerWidth >= 1024) setOpen(false); });
 })();
 </script>
+<script>
+  /* ===== SARKIT LAB - Carousel logic ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('carousel-track');
+  const prevBtn = document.getElementById('slider-prev-btn');
+  const nextBtn = document.getElementById('slider-next-btn');
+  if (!track) return;
 
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  const autoScrollSpeed = 0.65;
+  let isPaused = false;
+
+  // Auto scroll
+  function stepAutoScroll() {
+    if (!isPaused && !isDown) {
+      track.scrollLeft += autoScrollSpeed;
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) {
+        track.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(stepAutoScroll);
+  }
+  requestAnimationFrame(stepAutoScroll);
+
+  // Pause on hover
+  track.addEventListener('mouseenter', () => { isPaused = true; });
+  track.addEventListener('mouseleave', () => { isPaused = false; });
+
+  // Arrow buttons
+  const cardStep = 330;
+  if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left: cardStep, behavior: 'smooth' }));
+  if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardStep, behavior: 'smooth' }));
+
+  // Drag to scroll
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    isPaused = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  window.addEventListener('mouseup', () => {
+    if (isDown) { isDown = false; isPaused = false; }
+  });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+  // Touch support
+  track.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
+  track.addEventListener('touchend', () => { isPaused = false; }, { passive: true });
+});
+</script>
 </body>
 </html>
