@@ -1,4 +1,41 @@
 {
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/curriculum.html",
+      "destination": "/curriculum",
+      "permanent": true
+    },
+    {
+      "source": "/kits.html",
+      "destination": "/kits",
+      "permanent": true
+    },
+    {
+      "source": "/labsetup.html",
+      "destination": "/labsetup",
+      "permanent": true
+    },
+    {
+      "source": "/vlab.html",
+      "destination": "/vlab",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
