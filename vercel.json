@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/curriculum",
+      "destination": "/curriculum.html"
+    },
+    {
+      "source": "/kits",
+      "destination": "/kits.html"
+    },
+    {
+      "source": "/labsetup",
+      "destination": "/labsetup.html"
+    },
+    {
+      "source": "/vlab",
+      "destination": "/vlab.html"
+    }
+  ]
+}
